@@ -9226,3 +9226,304 @@ body.automation-modal-open {
     transform:translateY(0)
   }
 }
+
+
+/* Mobile polish fixes */
+.mobile-menu {
+  width:38px;
+  height:38px;
+  padding:0;
+  border:1px solid #dbe6f0;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:4px;
+  color:var(--navy);
+}
+
+.mobile-menu span {
+  width:17px;
+  height:2px;
+  display:block;
+  border-radius:10px;
+  background:currentColor;
+}
+
+@media(max-width:850px) {
+  .sidebar {
+    z-index:80;
+  }
+
+  .mobile-menu {
+    display:inline-flex;
+    flex:0 0 auto;
+  }
+
+  .side-foot .profile {
+    display:flex;
+    justify-content:flex-start;
+    gap:10px;
+  }
+
+  .side-foot .profile>div:not(.avatar) {
+    display:block;
+    min-width:0;
+    text-align:left;
+  }
+
+  .side-foot .profile b,
+  .side-foot .profile small {
+    display:block;
+    white-space:nowrap;
+  }
+
+  .side-foot .profile b {
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .portfolio-menu,
+  .building-menu,
+  .profile-menu,
+  .search-results,
+  .enhanced-select-menu,
+  .analytics-menu {
+    max-width:calc(100vw - 28px);
+  }
+
+  .building-menu,
+  .portfolio-menu {
+    left:0;
+    right:auto;
+    width:min(300px,calc(100vw - 36px));
+  }
+
+  .top-actions .portfolio-menu {
+    position:fixed;
+    top:62px;
+    left:auto;
+    right:14px;
+    width:min(320px,calc(100vw - 28px));
+  }
+
+  .analytics-filter,
+  .enhanced-select,
+  .building-filter-wrap,
+  .portfolio-wrap {
+    overflow:visible;
+  }
+}
+
+@media(max-width:540px) {
+  html,
+  body {
+    overflow-x:hidden;
+  }
+
+  .topbar {
+    min-height:58px;
+    height:58px;
+    padding:0 12px;
+  }
+
+  .sidebar {
+    width:min(268px,82vw);
+    left:calc(-1 * min(268px,82vw));
+  }
+
+  .sidebar .brand {
+    align-items:center;
+    gap:9px;
+    margin-bottom:16px;
+  }
+
+  .sidebar .brand-mark {
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
+  }
+
+  .side-foot {
+    padding:14px 12px 0;
+  }
+
+  .side-foot .profile {
+    padding:8px;
+  }
+
+  .side-foot .profile .avatar {
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
+  }
+
+  .kpis {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .kpi {
+    min-width:0;
+    padding:14px 12px;
+    overflow:hidden;
+  }
+
+  .kpi-top {
+    gap:8px;
+  }
+
+  .metric-icon {
+    width:32px;
+    height:32px;
+    flex:0 0 32px;
+  }
+
+  .login {
+    height:100vh;
+    min-height:0;
+    grid-template-columns:1fr;
+    overflow:hidden;
+  }
+
+  .login-left {
+    min-height:0;
+    height:206px;
+    padding:20px 28px 14px;
+  }
+
+  .login-left .brand {
+    margin-bottom:12px;
+  }
+
+  .login-left .brand-mark {
+    width:34px;
+    height:34px;
+  }
+
+  .login-copy {
+    max-width:100%;
+  }
+
+  .login-eyebrow {
+    font-size:10px;
+    margin-bottom:10px;
+  }
+
+  .login-copy h1 {
+    font-size:28px;
+    line-height:1.08;
+    max-width:460px;
+  }
+
+  .login-copy p {
+    font-size:14px;
+    line-height:1.45;
+    margin-top:12px;
+  }
+
+  .login-energy-card {
+    display:none;
+  }
+
+  .login-left small {
+    bottom:8px;
+    left:28px;
+    font-size:11px;
+  }
+
+  .login-right {
+    height:calc(100vh - 206px);
+    min-height:0;
+    overflow:auto;
+    padding:14px 18px 20px;
+    align-items:flex-start;
+  }
+
+  .auth-card {
+    width:100%;
+    padding:20px;
+    border-radius:24px;
+  }
+
+  .auth-tabs {
+    margin-bottom:18px;
+    padding:5px;
+  }
+
+  .auth-tabs button,
+  .role-pills button,
+  .auth-submit,
+  .google-btn {
+    min-height:46px;
+  }
+
+  .login-form h2 {
+    font-size:30px;
+  }
+
+  .login-form>p {
+    margin-bottom:18px;
+  }
+
+  .field {
+    margin-bottom:14px;
+  }
+
+  .field input {
+    padding:13px 14px;
+  }
+
+  .role-pills {
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+
+  .building-menu,
+  .portfolio-menu,
+  .profile-menu,
+  .enhanced-select-menu,
+  .analytics-menu {
+    width:min(318px,calc(100vw - 28px));
+  }
+
+  .building-menu {
+    left:0;
+    right:auto;
+  }
+
+  .portfolio-menu {
+    position:fixed;
+    top:58px;
+    left:14px;
+    right:14px;
+    width:auto;
+  }
+}
+
+@media(max-width:390px) {
+  .login-left {
+    height:184px;
+    padding:16px 22px 12px;
+  }
+
+  .login-copy h1 {
+    font-size:24px;
+  }
+
+  .login-copy p {
+    display:none;
+  }
+
+  .login-right {
+    height:calc(100vh - 184px);
+    padding:12px 14px 18px;
+  }
+
+  .auth-card {
+    padding:16px;
+  }
+
+  .login-form h2 {
+    font-size:26px;
+  }
+}

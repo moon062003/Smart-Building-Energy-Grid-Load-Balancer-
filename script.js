@@ -1,4 +1,14 @@
 const sidebar=document.getElementById('sidebar');
+
+function toggleMobileMenu(event) {
+  if (event) event.stopPropagation();
+  if (!sidebar) return;
+  sidebar.classList.toggle('open');
+  closeProfileMenu();
+  closePortfolioMenu();
+  closeBuildingMenu();
+  closeSearchResults();
+}
 let toastTimer;
 const SESSION_AUTH_KEY='gridbalanceSessionLoggedIn';
 const SESSION_PAGE_KEY='gridbalanceActivePage';
@@ -476,7 +486,11 @@ function logout() {
 }
 
 document.addEventListener('click',event=> {
-  closeProfileMenu();if(!event.target.closest('.portfolio-wrap'))closePortfolioMenu();if(!event.target.closest('.building-filter-wrap'))closeBuildingMenu();if(!event.target.closest('.search'))closeSearchResults()
+  closeProfileMenu();
+  if(!event.target.closest('.portfolio-wrap'))closePortfolioMenu();
+  if(!event.target.closest('.building-filter-wrap'))closeBuildingMenu();
+  if(!event.target.closest('.search'))closeSearchResults();
+  if(sidebar&&sidebar.classList.contains('open')&&!event.target.closest('#sidebar')&&!event.target.closest('.mobile-menu'))sidebar.classList.remove('open')
 })
 document.addEventListener('DOMContentLoaded',initNavigation)
 function toast(message) {
