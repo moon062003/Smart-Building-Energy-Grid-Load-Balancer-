@@ -9527,3 +9527,193 @@ body.automation-modal-open {
     font-size:26px;
   }
 }
+
+
+/* Mobile login responsiveness refinement */
+@media(max-width:540px) {
+  .login {
+    height:100svh;
+    min-height:100svh;
+    overflow:hidden;
+    background:#fff;
+  }
+
+  .login-left {
+    height:190px;
+    padding:17px 24px 13px;
+    border-radius:0 0 18px 18px;
+  }
+
+  .login-left .brand {
+    margin-bottom:9px;
+    gap:9px;
+  }
+
+  .login-left .brand-mark {
+    width:31px;
+    height:31px;
+    flex:0 0 31px;
+  }
+
+  .login-left .brand span:last-child {
+    font-size:16px;
+  }
+
+  .login-eyebrow {
+    font-size:9px;
+    letter-spacing:2.4px;
+    margin-bottom:8px;
+  }
+
+  .login-copy h1 {
+    font-size:23px;
+    line-height:1.08;
+    letter-spacing:-.35px;
+    max-width:330px;
+  }
+
+  .login-copy p {
+    font-size:12px;
+    line-height:1.42;
+    max-width:330px;
+    margin-top:9px;
+  }
+
+  .login-left small {
+    display:none;
+  }
+
+  .login-right {
+    height:calc(100svh - 190px);
+    padding:10px 15px 14px;
+  }
+
+  .auth-card {
+    padding:17px;
+    border-radius:22px;
+    box-shadow:0 14px 34px rgba(8,35,63,.10);
+  }
+
+  .auth-tabs {
+    margin-bottom:13px;
+    border-radius:14px;
+  }
+
+  .auth-tabs button {
+    height:40px;
+    border-radius:11px;
+    font-size:13px;
+  }
+
+  .login-form h2 {
+    font-size:25px;
+    margin-bottom:7px;
+  }
+
+  .login-form>p {
+    font-size:12px;
+    margin-bottom:12px;
+  }
+
+  .field {
+    gap:6px;
+    margin:9px 0;
+  }
+
+  .field label,
+  .field label a {
+    font-size:11px;
+  }
+
+  .field input {
+    min-height:42px;
+    padding:10px 13px;
+    border-radius:13px;
+    font-size:14px;
+  }
+
+  .role-picker-wrap {
+    margin:10px 0;
+  }
+
+  .role-picker-wrap>label {
+    font-size:12px;
+    margin-bottom:8px;
+  }
+
+  .role-pills {
+    gap:7px;
+  }
+
+  .role-pills button {
+    height:40px;
+    min-height:40px;
+    border-radius:12px;
+    font-size:13px;
+  }
+
+  .form-row {
+    align-items:flex-start;
+    gap:10px;
+    margin:9px 0 11px;
+    font-size:11px;
+  }
+
+  .auth-row span {
+    text-align:right;
+    line-height:1.25;
+  }
+
+  .auth-submit,
+  .google-btn {
+    height:43px;
+    min-height:43px;
+    border-radius:13px;
+    font-size:13px;
+  }
+
+  .google-btn {
+    margin-top:9px;
+  }
+}
+
+@media(max-width:390px) {
+  .login-left {
+    height:160px;
+    padding:14px 20px 10px;
+  }
+
+  .login-left .brand {
+    margin-bottom:7px;
+  }
+
+  .login-eyebrow {
+    margin-bottom:6px;
+  }
+
+  .login-copy h1 {
+    font-size:20px;
+  }
+
+  .login-copy p {
+    display:none;
+  }
+
+  .login-right {
+    height:calc(100svh - 160px);
+    padding:8px 13px 12px;
+  }
+
+  .auth-card {
+    padding:15px;
+  }
+
+  .login-form h2 {
+    font-size:23px;
+  }
+
+  .role-pills button {
+    height:38px;
+    min-height:38px;
+  }
+}
