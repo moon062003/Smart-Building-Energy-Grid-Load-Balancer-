@@ -1,0 +1,4106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    GridBalance - Energy intelligence for commercial buildings
+  </title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23fff9db%22%2F%3E%3Cpath%20d%3D%22M32%207c-2%200-3.9%201-5.4%202.8L11.2%2027.4c-1.6%201.8-.3%204.7%202.1%204.7h4.2v7.1c0%203.9%202.4%207.2%206%208.4v5.1c0%201.8%201.5%203.3%203.3%203.3h10.4c1.8%200%203.3-1.5%203.3-3.3v-5.1c3.6-1.2%206-4.5%206-8.4v-7.1h4.2c2.4%200%203.7-2.9%202.1-4.7L37.4%209.8C35.9%208%2034%207%2032%207Z%22%20fill%3D%22%23ffd21f%22%20stroke%3D%22%23020617%22%20stroke-width%3D%224.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cg%20fill%3D%22%23fffef3%22%3E%3Crect%20x%3D%2226%22%20y%3D%2221%22%20width%3D%225%22%20height%3D%225%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2234%22%20y%3D%2221%22%20width%3D%225%22%20height%3D%225%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2226%22%20y%3D%2229%22%20width%3D%225%22%20height%3D%225%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2234%22%20y%3D%2229%22%20width%3D%225%22%20height%3D%225%22%20rx%3D%221%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23020617%22%20stroke-width%3D%224.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M28%2052V40%22%2F%3E%3Cpath%20d%3D%22M36%2052V40%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2238%22%20r%3D%224%22%20fill%3D%22%23fff9db%22%2F%3E%3Ccircle%20cx%3D%2236%22%20cy%3D%2238%22%20r%3D%224%22%20fill%3D%22%23fff9db%22%2F%3E%3Cpath%20d%3D%22M22%2056h20%22%2F%3E%3Cpath%20d%3D%22M22%2061h20%22%2F%3E%3Cpath%20d%3D%22M25%2061l6%205h2l6-5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    try{if(sessionStorage.getItem('gridbalanceSessionLoggedIn')==='true'){document.documentElement.classList.add('session-restoring');setTimeout(function(){document.documentElement.classList.remove('session-restoring')},900);document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){var login=document.getElementById('login');var app=document.getElementById('app');var page=sessionStorage.getItem('gridbalanceActivePage')||'overview';if(login)login.style.display='none';if(app)app.style.display='grid';document.querySelectorAll('.page-view').forEach(function(view){view.classList.remove('active')});var target=document.getElementById(page)||document.getElementById('overview');if(target)target.classList.add('active');document.querySelectorAll('#nav button').forEach(function(btn){btn.classList.toggle('active',btn.dataset.page===(target?target.id:'overview'))});document.documentElement.classList.remove('session-restoring')},500)})}}catch(error){document.documentElement.classList.remove('session-restoring')}
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="login" class="login">
+    <section class="login-left">
+      <div class="login-brand">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+          <svg class="brand-logo bulb-logo" viewBox="0 0 64 64" role="img">
+            <path class="bulb-house-fill" d="M32 7c-2 0-3.9 1-5.4 2.8L11.2 27.4c-1.6 1.8-.3 4.7 2.1 4.7h4.2v7.1c0 3.9 2.4 7.2 6 8.4v5.1c0 1.8 1.5 3.3 3.3 3.3h10.4c1.8 0 3.3-1.5 3.3-3.3v-5.1c3.6-1.2 6-4.5 6-8.4v-7.1h4.2c2.4 0 3.7-2.9 2.1-4.7L37.4 9.8C35.9 8 34 7 32 7Z"/>
+            <path class="bulb-house-outline" d="M32 7c-2 0-3.9 1-5.4 2.8L11.2 27.4c-1.6 1.8-.3 4.7 2.1 4.7h4.2v7.1c0 3.9 2.4 7.2 6 8.4v5.1c0 1.8 1.5 3.3 3.3 3.3h10.4c1.8 0 3.3-1.5 3.3-3.3v-5.1c3.6-1.2 6-4.5 6-8.4v-7.1h4.2c2.4 0 3.7-2.9 2.1-4.7L37.4 9.8C35.9 8 34 7 32 7Z"/>
+            <g class="bulb-window">
+              <rect x="26" y="21" width="5" height="5"/>
+              <rect x="34" y="21" width="5" height="5"/>
+              <rect x="26" y="29" width="5" height="5"/>
+              <rect x="34" y="29" width="5" height="5"/>
+            </g>
+            <g class="bulb-circuit">
+              <path d="M25 52V42"/>
+              <path d="M39 52V42"/>
+              <circle cx="25" cy="40" r="2.4"/>
+              <circle cx="39" cy="40" r="2.4"/>
+            </g>
+            <g class="bulb-base">
+              <path d="M22 56h20"/>
+              <path d="M22 61h20"/>
+              <path d="M25 61l6 5h2l6-5"/>
+            </g>
+          </svg>
+        </span>
+        <span>
+        GridBalance
+      </span>
+    </div>
+  </div>
+  <div class="login-copy">
+    <div class="login-eyebrow">
+      Smart Energy Command
+    </div>
+    <h1>
+      Balance building energy before the grid feels it.
+    </h1>
+    <p>
+      Live HVAC demand, solar generation, and load-shift automation for commercial real estate teams.
+    </p>
+  </div>
+  <div class="login-energy-card" aria-hidden="true">
+    <div class="energy-grid-lines">
+    </div>
+    <div class="energy-bars">
+      <i>
+    </i>
+    <i>
+  </i>
+  <i>
+</i>
+<i>
+</i>
+</div>
+<svg class="energy-flow" viewBox="0 0 620 150" preserveAspectRatio="none">
+<path class="flow-fill" d="M30 118 C110 104,135 60,220 66 S340 124,430 64 S520 35,590 48 L590 128 L30 128Z">
+</path>
+<path class="flow-line" d="M30 118 C110 104,135 60,220 66 S340 124,430 64 S520 35,590 48">
+</path>
+<circle class="flow-dot" cx="382" cy="74" r="7">
+</circle>
+</svg>
+<span class="ai-chip">
+AI Shift
+</span>
+</div>
+<small>
+(c) 2026 GridBalance Technologies
+</small>
+</section>
+<section class="login-right">
+<form class="login-form auth-card" onsubmit="event.preventDefault(); enterApp()">
+<div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+<button type="button" class="active" id="signInTab" onclick="setAuthMode('signin')">
+Sign in
+</button>
+<button type="button" id="signUpTab" onclick="setAuthMode('signup')">
+Sign up
+</button>
+</div>
+<h2 id="authTitle">
+Welcome back
+</h2>
+<p id="authSubtitle">
+Use the role and saved demo account.
+</p>
+<div class="field">
+<label>
+Email address
+</label>
+<input id="loginEmail" required type="email" value="moon@meridianre.com" autocomplete="email">
+</div>
+<div class="field">
+<label>
+Password
+<a href="#" onclick="event.preventDefault(); forgotPassword()">
+Forgot password?
+</a>
+</label>
+<input id="loginPassword" required type="password" value="password" autocomplete="current-password">
+</div>
+<div class="role-picker-wrap">
+<label>
+Choose your role
+</label>
+<div class="role-pills" role="radiogroup" aria-label="Choose your role">
+<button type="button" class="active" data-role="facility" onclick="selectLoginRole('facility')">
+Manager
+</button>
+<button type="button" data-role="analyst" onclick="selectLoginRole('analyst')">
+Analyst
+</button>
+<button type="button" data-role="admin" onclick="selectLoginRole('admin')">
+Admin
+</button>
+</div>
+</div>
+<div class="form-row auth-row">
+<label>
+<input id="rememberLogin" type="checkbox" checked>
+Remember me
+</label>
+<span id="loginAutofillNote">
+Facility Manager credentials loaded
+</span>
+</div>
+<button class="primary full auth-submit" id="authSubmit">
+Sign in
+</button>
+<button class="google-btn" type="button" onclick="continueWithGoogle()">
+<span class="google-mark">
+G
+</span>
+Continue with Google
+</button>
+<p class="auth-switch">
+<span id="authSwitchText">
+Not registered?
+</span>
+<a href="#" onclick="event.preventDefault(); toggleAuthMode()" id="authSwitchLink">
+Create an account
+</a>
+</p>
+</form>
+</section>
+</div>
+<div id="app" class="app" style="display:none">
+<aside class="sidebar" id="sidebar">
+<div class="brand">
+<span class="brand-mark" aria-hidden="true">
+<svg class="brand-logo bulb-logo" viewBox="0 0 64 64" role="img">
+<path class="bulb-house-fill" d="M32 7c-2 0-3.9 1-5.4 2.8L11.2 27.4c-1.6 1.8-.3 4.7 2.1 4.7h4.2v7.1c0 3.9 2.4 7.2 6 8.4v5.1c0 1.8 1.5 3.3 3.3 3.3h10.4c1.8 0 3.3-1.5 3.3-3.3v-5.1c3.6-1.2 6-4.5 6-8.4v-7.1h4.2c2.4 0 3.7-2.9 2.1-4.7L37.4 9.8C35.9 8 34 7 32 7Z"/>
+<path class="bulb-house-outline" d="M32 7c-2 0-3.9 1-5.4 2.8L11.2 27.4c-1.6 1.8-.3 4.7 2.1 4.7h4.2v7.1c0 3.9 2.4 7.2 6 8.4v5.1c0 1.8 1.5 3.3 3.3 3.3h10.4c1.8 0 3.3-1.5 3.3-3.3v-5.1c3.6-1.2 6-4.5 6-8.4v-7.1h4.2c2.4 0 3.7-2.9 2.1-4.7L37.4 9.8C35.9 8 34 7 32 7Z"/>
+<g class="bulb-window">
+<rect x="26" y="21" width="5" height="5"/>
+<rect x="34" y="21" width="5" height="5"/>
+<rect x="26" y="29" width="5" height="5"/>
+<rect x="34" y="29" width="5" height="5"/>
+</g>
+<g class="bulb-circuit">
+<path d="M25 52V42"/>
+<path d="M39 52V42"/>
+<circle cx="25" cy="40" r="2.4"/>
+<circle cx="39" cy="40" r="2.4"/>
+</g>
+<g class="bulb-base">
+<path d="M22 56h20"/>
+<path d="M22 61h20"/>
+<path d="M25 61l6 5h2l6-5"/>
+</g>
+</svg>
+</span>
+GridBalance
+</div>
+<div class="nav-label">
+Workspace
+</div>
+<nav class="nav" id="nav">
+<button class="active" data-page="overview">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="3" width="7" height="8" rx="1.5">
+</rect>
+<rect x="14" y="3" width="7" height="5" rx="1.5">
+</rect>
+<rect x="14" y="12" width="7" height="9" rx="1.5">
+</rect>
+<rect x="3" y="15" width="7" height="6" rx="1.5">
+</rect>
+</svg>
+</span>
+Overview
+</button>
+<button data-page="buildings">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<path d="M4 21V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v15">
+</path>
+<path d="M16 9h2a2 2 0 0 1 2 2v10">
+</path>
+<path d="M8 8h4M8 12h4M8 16h4M3 21h18">
+</path>
+</svg>
+</span>
+Buildings
+</button>
+<button data-page="analytics">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V5">
+</path>
+<path d="M4 19h16">
+</path>
+<path d="M8 16v-5">
+</path>
+<path d="M12 16V8">
+</path>
+<path d="M16 16v-9">
+</path>
+</svg>
+</span>
+Energy Analytics
+</button>
+<button data-page="hvac">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="2">
+</circle>
+<path d="M12 4c2.2 0 3.4 2 2.2 3.8L12 11">
+</path>
+<path d="M20 12c0 2.2-2 3.4-3.8 2.2L13 12">
+</path>
+<path d="M12 20c-2.2 0-3.4-2-2.2-3.8L12 13">
+</path>
+<path d="M4 12c0-2.2 2-3.4 3.8-2.2L11 12">
+</path>
+</svg>
+</span>
+HVAC
+</button>
+<button data-page="solar">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4">
+</circle>
+<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41">
+</path>
+</svg>
+</span>
+Solar
+</button>
+<button data-page="balancer">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<path d="M12 3v18">
+</path>
+<path d="M5 7h14">
+</path>
+<path d="M6 7l-3 6h6l-3-6Z">
+</path>
+<path d="M18 7l-3 6h6l-3-6Z">
+</path>
+<path d="M8 21h8">
+</path>
+</svg>
+</span>
+Load Balancer
+</button>
+<button data-page="automation">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<rect x="5" y="7" width="14" height="11" rx="2">
+</rect>
+<path d="M12 3v4">
+</path>
+<circle cx="9" cy="12" r="1">
+</circle>
+<circle cx="15" cy="12" r="1">
+</circle>
+<path d="M9 16h6">
+</path>
+</svg>
+</span>
+Automation
+</button>
+<button data-page="alerts">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9">
+</path>
+<path d="M10 21h4">
+</path>
+</svg>
+</span>
+Alerts
+<span id="alertCount" style="margin-left:auto;background:#fff0e7;color:#c95c04;border-radius:10px;padding:1px 6px;font-size:10px">
+3
+</span>
+</button>
+<button data-page="sustainability">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<path d="M5 20c8-1 13-6 14-15-8 1-13 6-14 15Z">
+</path>
+<path d="M5 20c2-5 6-9 12-12">
+</path>
+</svg>
+</span>
+Sustainability
+</button>
+<button data-page="reports">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h8l4 4v14H6z">
+</path>
+<path d="M14 3v5h5">
+</path>
+<path d="M9 13h6M9 17h6M9 9h2">
+</path>
+</svg>
+</span>
+Reports
+</button>
+<button data-page="settings">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z">
+</path>
+<path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2 3.4-.2-.1a1.7 1.7 0 0 0-2 .3l-.2.2-3.4-2 .1-.3a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.8.2l-.2.1-3.4-2 .1-.2a1.7 1.7 0 0 0-.3-1.9L5.4 13V9l.2-.1a1.7 1.7 0 0 0 .3-1.9l-.1-.2 3.4-2 .2.1a1.7 1.7 0 0 0 1.9-.3l.1-.2h4l.1.2a1.7 1.7 0 0 0 1.9.3l.2-.1 2 3.4-.1.2a1.7 1.7 0 0 0 .3 1.9l.2.1v4l-.2.1Z">
+</path>
+</svg>
+</span>
+Settings
+</button>
+</nav>
+<div class="side-foot">
+<div class="profile-wrap">
+<button class="profile" id="profileTrigger" type="button" onclick="toggleProfileMenu(event)">
+<div class="avatar">
+M
+</div>
+<div>
+<b style="font-size:12px">
+Moon
+</b>
+<small>
+Facility Manager
+</small>
+</div>
+</button>
+<div class="profile-menu" id="profileMenu">
+<div class="profile-card">
+<div class="avatar">
+M
+</div>
+<div>
+<b>
+Moon
+</b>
+<small>
+Facility Manager
+</small>
+</div>
+</div>
+<button type="button" onclick="openProfileDashboard()">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="4">
+</circle>
+<path d="M4 21a8 8 0 0 1 16 0">
+</path>
+</svg>
+</span>
+Profile
+</button>
+<button type="button" onclick="go('settings')">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z">
+</path>
+<path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2 3.4-.2-.1a1.7 1.7 0 0 0-2 .3l-.2.2-3.4-2 .1-.3a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.8.2l-.2.1-3.4-2 .1-.2a1.7 1.7 0 0 0-.3-1.9L5.4 13V9l.2-.1a1.7 1.7 0 0 0 .3-1.9l-.1-.2 3.4-2 .2.1a1.7 1.7 0 0 0 1.9-.3l.1-.2h4l.1.2a1.7 1.7 0 0 0 1.9.3l.2-.1 2 3.4-.1.2a1.7 1.7 0 0 0 .3 1.9l.2.1v4l-.2.1Z">
+</path>
+</svg>
+</span>
+Account Settings
+</button>
+<button type="button" class="danger" onclick="logout()">
+<span class="ico">
+<svg viewBox="0 0 24 24">
+<path d="M10 17l5-5-5-5">
+</path>
+<path d="M15 12H3">
+</path>
+<path d="M21 19V5a2 2 0 0 0-2-2h-5">
+</path>
+</svg>
+</span>
+Logout
+</button>
+</div>
+</div>
+</div>
+</aside>
+<main class="main">
+<header class="topbar">
+<button class="mobile-menu" onclick="sidebar.classList.toggle('open')">
+Menu
+</button>
+<div class="search">
+<input id="globalSearch" placeholder="Search buildings, zones, reports" oninput="search(this.value)" onfocus="search(this.value)" autocomplete="off">
+<div id="searchResults" class="search-results">
+</div>
+</div>
+<div class="top-actions">
+<button class="pill" id="liveDateTime" type="button" onclick="toast('Showing live local date and time')">
+Loading time...
+</button>
+<button class="iconbtn tip" type="button" title="Help & Support" data-tooltip="Help & Support" onclick="openHelpSupport()">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9">
+</circle>
+<path d="M9.8 9a2.4 2.4 0 0 1 4.6 1.1c0 1.8-2.4 2.1-2.4 3.7">
+</path>
+<path d="M12 17h.01">
+</path>
+</svg>
+</button>
+<button class="iconbtn tip" type="button" title="Alerts" data-tooltip="Alerts" onclick="go('alerts')">
+<svg viewBox="0 0 24 24">
+<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9">
+</path>
+<path d="M10 21h4">
+</path>
+</svg>
+<span class="alert-badge" id="topAlertBadge">
+3
+</span>
+</button>
+<div class="portfolio-wrap">
+<button class="select portfolio-select" id="portfolioTrigger" type="button" title="Switch portfolio" onclick="togglePortfolioMenu(event)">
+<span id="portfolioLabel">
+Portfolio: Meridian Real Estate
+</span>
+<svg viewBox="0 0 24 24">
+<path d="M6 9l6 6 6-6">
+</path>
+</svg>
+</button>
+<div class="portfolio-menu" id="portfolioMenu">
+<button type="button" onclick="selectPortfolio('Portfolio: Meridian Real Estate','3 active commercial buildings')">
+<span>
+<b>
+Meridian Real Estate
+</b>
+<small>
+3 active commercial buildings
+</small>
+</span>
+<span class="check">
+✓
+</span>
+</button>
+<button type="button" onclick="selectPortfolio('Portfolio: Downtown Campus','Office campus and retail block')">
+<span>
+<b>
+Downtown Campus
+</b>
+<small>
+Office campus and retail block
+</small>
+</span>
+<span>
+</span>
+</button>
+<button type="button" onclick="selectPortfolio('Portfolio: North Tower Group','High-rise tower portfolio')">
+<span>
+<b>
+North Tower Group
+</b>
+<small>
+High-rise tower portfolio
+</small>
+</span>
+<span>
+</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<div class="page">
+<section id="overview" class="page-view active">
+<div class="heading">
+<div>
+<h1>
+Good morning, Moon
+</h1>
+<p id="overviewSubtitle">
+Here's how all buildings are performing today.
+</p>
+</div>
+<div class="heading-actions">
+<div class="building-filter-wrap">
+<button class="secondary building-filter" id="buildingFilterTrigger" type="button" onclick="toggleBuildingMenu(event)">
+<span id="buildingFilterLabel">
+All Buildings
+</span>
+<svg viewBox="0 0 24 24">
+<path d="M6 9l6 6 6-6">
+</path>
+</svg>
+</button>
+<div class="building-menu" id="buildingMenu">
+<button type="button" onclick="selectBuilding('all')">
+<span>
+<b>
+All Buildings
+</b>
+<small>
+Portfolio-wide performance
+</small>
+</span>
+<span class="check">
+✓
+</span>
+</button>
+<button type="button" onclick="selectBuilding('meridian')">
+<span>
+<b>
+Meridian Tower
+</b>
+<small>
+Commercial tower - Dhaka
+</small>
+</span>
+<span>
+</span>
+</button>
+<button type="button" onclick="selectBuilding('downtown')">
+<span>
+<b>
+Downtown Campus
+</b>
+<small>
+Office and retail campus
+</small>
+</span>
+<span>
+</span>
+</button>
+<button type="button" onclick="selectBuilding('north')">
+<span>
+<b>
+North Tower Group
+</b>
+<small>
+High-rise building group
+</small>
+</span>
+<span>
+</span>
+</button>
+</div>
+</div>
+<button class="secondary" id="refreshBtn" onclick="refreshDashboard()">
+Refresh
+</button>
+</div>
+</div>
+<div class="kpis">
+<div class="card kpi">
+<div class="kpi-top">
+Current Load
+<span class="metric-icon">
+<svg viewBox="0 0 24 24">
+<path d="M13 2L4 14h7l-1 8 10-13h-7l1-7Z">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+1.84
+<span>
+MW
+</span>
+</div>
+<span class="trend">
+8.4% vs yesterday
+</span>
+<svg class="spark" viewBox="0 0 55 19">
+<path d="M1 13L9 11 16 15 24 8 31 11 39 5 46 8 54 2" fill="none" stroke="#2563eb" stroke-width="2"/>
+</svg>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Energy Consumption
+<span class="metric-icon green">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V5">
+</path>
+<path d="M4 19h16">
+</path>
+<path d="M8 16v-5">
+</path>
+<path d="M12 16V8">
+</path>
+<path d="M16 16v-9">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+18.6
+<span>
+MWh
+</span>
+</div>
+<span class="trend">
+6.2% vs yesterday
+</span>
+<svg class="spark" viewBox="0 0 55 19">
+<path d="M1 5L9 8 16 4 24 12 31 10 39 15 46 11 54 16" fill="none" stroke="#16a34a" stroke-width="2"/>
+</svg>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Solar Generation
+<span class="metric-icon sun">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4">
+</circle>
+<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+7.4
+<span>
+MWh
+</span>
+</div>
+<span class="trend neutral">
+39.8% of total demand
+</span>
+<svg class="spark" viewBox="0 0 55 19">
+<path d="M1 17L9 15 16 9 24 5 31 3 39 6 46 11 54 16" fill="none" stroke="#f59e0b" stroke-width="2"/>
+</svg>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Energy Cost
+<span class="metric-icon orange">
+<svg viewBox="0 0 24 24">
+<path d="M12 2v20">
+</path>
+<path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+$1,284
+</div>
+<span class="trend">
+11.7% this week
+</span>
+<svg class="spark" viewBox="0 0 55 19">
+<path d="M1 4L9 8 16 6 24 13 31 10 39 14 46 12 54 17" fill="none" stroke="#f97316" stroke-width="2"/>
+</svg>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+CO2 Avoided
+<span class="metric-icon green">
+<svg viewBox="0 0 24 24">
+<path d="M5 20c8-1 13-6 14-15-8 1-13 6-14 15Z">
+</path>
+<path d="M5 20c2-5 6-9 12-12">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+2.8
+<span>
+tons
+</span>
+</div>
+<span class="trend neutral">
+This month
+</span>
+<svg class="spark" viewBox="0 0 55 19">
+<path d="M1 15L9 14 16 10 24 12 31 7 39 8 46 3 54 5" fill="none" stroke="#16a34a" stroke-width="2"/>
+</svg>
+</div>
+</div>
+<div class="grid2">
+<div class="card demand-panel demand-pro">
+<div class="card-head">
+<div class="demand-title">
+<div class="demand-title-icon">
+<svg viewBox="0 0 24 24">
+<path d="M13 2L4 14h7l-1 8 10-13h-7l1-7Z">
+</path>
+</svg>
+</div>
+<div>
+<h2>
+Building Energy Demand
+</h2>
+<div class="sub">
+Live power demand across Meridian Tower - MW
+</div>
+<span class="live-chip">
+<i>
+</i>
+Live demand stream
+</span>
+</div>
+</div>
+<div class="segmented">
+<button class="sel" onclick="period(this,'Today')">
+Today
+</button>
+<button onclick="period(this,'Yesterday')">
+Yesterday
+</button>
+<button onclick="period(this,'This Week')">
+This Week
+</button>
+<button onclick="period(this,'This Month')">
+This Month
+</button>
+</div>
+</div>
+<div class="demand-metrics">
+<div class="demand-chip">
+<span>
+Current demand
+</span>
+<b id="demandStatCurrent">
+1.84 MW
+</b>
+<em id="demandStatTrend">
++8.4% vs yesterday
+</em>
+</div>
+<div class="demand-chip warn">
+<span>
+Forecast risk
+</span>
+<b id="demandStatRisk">
+High at 19:20
+</b>
+<em id="demandStatForecast">
++6.1% predicted
+</em>
+</div>
+<div class="demand-chip">
+<span>
+Shift potential
+</span>
+<b id="demandStatShift">
+126 kW
+</b>
+<em>
+HVAC flexible load
+</em>
+</div>
+</div>
+<div class="demand-chart-wrap">
+<svg class="demand demand-motion" id="demandChart" viewBox="0 0 700 290" preserveAspectRatio="none" onmousemove="chartTip(event,this)" onmouseleave="hideTip()">
+<defs>
+<linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
+<stop stop-color="#2563eb" stop-opacity=".30"/>
+<stop offset=".62" stop-color="#60a5fa" stop-opacity=".08"/>
+<stop offset="1" stop-color="#2563eb" stop-opacity=".01"/>
+</linearGradient>
+<linearGradient id="peakBand" x1="0" x2="0" y1="0" y2="1">
+<stop stop-color="#fff4e8"/>
+<stop offset="1" stop-color="#fff"/>
+</linearGradient>
+<filter id="demandGlow" x="-20%" y="-20%" width="140%" height="140%">
+<feGaussianBlur stdDeviation="5" result="blur"/>
+<feMerge>
+<feMergeNode in="blur"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+</filter>
+</defs>
+<rect class="peak-window" x="462" y="18" width="148" height="214" fill="url(#peakBand)"/>
+<g class="peak-callout">
+<rect x="482" y="26" width="108" height="28" rx="14" fill="#fff" stroke="#fed7aa"/>
+<text x="502" y="44" fill="#c96712" font-size="10" font-weight="700">
+PEAK WINDOW
+</text>
+</g>
+<g class="demand-grid">
+<line x1="46" y1="46" x2="680" y2="46"/>
+<line x1="46" y1="106" x2="680" y2="106"/>
+<line x1="46" y1="166" x2="680" y2="166"/>
+<line x1="46" y1="226" x2="680" y2="226"/>
+</g>
+<g class="demand-axis">
+<text x="7" y="49">
+2.4
+</text>
+<text x="7" y="109">
+1.8
+</text>
+<text x="7" y="169">
+1.2
+</text>
+<text x="12" y="229">
+0.6
+</text>
+<text x="43" y="258">
+00:00
+</text>
+<text x="198" y="258">
+06:00
+</text>
+<text x="356" y="258">
+12:00
+</text>
+<text x="514" y="258">
+18:00
+</text>
+<text x="650" y="258">
+24:00
+</text>
+</g>
+<path id="demandArea" class="demand-area" d="M46 198 C75 194,86 192,110 187 S153 184,178 166 S220 124,247 119 S283 105,315 117 S344 91,376 103 S414 83,445 89 S477 70,510 78 S546 50,575 68 S617 97,647 126 S665 148,680 160 L680 232 L46 232Z" fill="url(#area)"/>
+<path id="actualDemandGlow" class="demand-line-glow" d="M46 198 C75 194,86 192,110 187 S153 184,178 166 S220 124,247 119 S283 105,315 117 S344 91,376 103 S414 83,445 89 S477 70,510 78 S546 50,575 68 S617 97,647 126 S665 148,680 160" fill="none" stroke="#60a5fa" stroke-width="12" stroke-linecap="round"/>
+<path id="actualDemandLine" class="demand-line actual" d="M46 198 C75 194,86 192,110 187 S153 184,178 166 S220 124,247 119 S283 105,315 117 S344 91,376 103 S414 83,445 89 S477 70,510 78 S546 50,575 68 S617 97,647 126 S665 148,680 160" fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linecap="round"/>
+<path id="predictedDemandLine" class="demand-line predicted" d="M46 203 C120 190,175 159,247 134 S340 108,410 100 S525 78,575 80 S633 109,680 141" fill="none" stroke="#65a5f0" stroke-width="2.2" stroke-dasharray="6 7" stroke-linecap="round"/>
+<line class="threshold-line" x1="46" y1="66" x2="680" y2="66" stroke="#f97316" stroke-width="2" stroke-dasharray="5 4"/>
+<line class="capacity-line" x1="46" y1="49" x2="680" y2="49" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4 4"/>
+<circle class="data-dot" cx="315" cy="117" r="4"/>
+<circle class="data-dot" cx="445" cy="89" r="4"/>
+<circle class="data-dot" cx="575" cy="68" r="4"/>
+<circle id="demandHalo" class="chart-halo" cx="575" cy="68" r="8"/>
+<circle id="demandPulse" class="chart-pulse" cx="575" cy="68" r="5"/>
+</svg>
+</div>
+<div class="legend premium-legend">
+<span>
+<i class="dot" style="background:#2563eb">
+</i>
+Actual consumption
+</span>
+<span>
+<i class="dot" style="background:#65a5f0">
+</i>
+Predicted consumption
+</span>
+<span>
+<i class="dot" style="background:#f97316">
+</i>
+Peak threshold
+</span>
+<span>
+<i class="dot" style="background:#dc2626">
+</i>
+Grid capacity
+</span>
+</div>
+<div class="demand-insight">
+<div>
+<strong id="demandInsightTitle">
+Optimization window ready
+</strong>
+<span id="demandInsightText">
+Shift HVAC load before 19:20 to avoid peak tariff pressure.
+</span>
+</div>
+<button class="secondary" onclick="openModal()">
+Review action
+</button>
+</div>
+</div>
+<div class="card pad solar-card">
+<div class="card-head">
+<div class="solar-title">
+<div class="solar-title-icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4">
+</circle>
+<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41">
+</path>
+</svg>
+</div>
+<div>
+<h2>
+Solar vs Grid Energy
+</h2>
+<div class="sub">
+Today's energy source mix
+</div>
+<span class="solar-live">
+<i>
+</i>
+Solar contribution active
+</span>
+</div>
+</div>
+<button class="secondary" style="padding:5px 7px;font-size:10px" onclick="go('solar')">
+Details
+</button>
+</div>
+<div class="energy-origin">
+<div class="donut" onmousemove="solarTip(event)" onmouseleave="hideTip()" aria-label="Solar and grid energy readings">
+</div>
+<div class="origin-data">
+<div class="origin-row">
+<span>
+Solar used
+</span>
+<b>
+7.4 MWh
+</b>
+</div>
+<div class="origin-row">
+<span>
+Solar exported
+</span>
+<b>
+1.2 MWh
+</b>
+</div>
+<div class="origin-row">
+<span>
+Grid imported
+</span>
+<b>
+11.2 MWh
+</b>
+</div>
+</div>
+</div>
+<div class="insight">
+Solar generation is currently covering 39.8% of building demand.
+</div>
+</div>
+</div>
+<h2 class="section-title">
+Operations control
+</h2>
+<div class="grid2">
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+HVAC Energy Consumption
+</h2>
+<div class="sub">
+Live performance across all zones
+</div>
+</div>
+<button class="secondary" style="padding:5px 7px;font-size:10px" onclick="go('hvac')">
+Manage HVAC
+</button>
+</div>
+<div class="stat-grid">
+<div class="stat">
+<span>
+Current HVAC Load
+</span>
+<b>
+642 kW
+</b>
+</div>
+<div class="stat">
+<span>
+Today
+</span>
+<b>
+5.8 MWh
+</b>
+</div>
+<div class="stat">
+<span>
+Efficiency
+</span>
+<b style="color:var(--green)">
+87%
+</b>
+</div>
+<div class="stat">
+<span>
+Avg. temperature
+</span>
+<b>
+23.1C
+</b>
+</div>
+</div>
+<svg class="mini-chart" viewBox="0 0 500 110" preserveAspectRatio="none">
+<g stroke="#edf1f4">
+<line x1="0" y1="20" x2="500" y2="20"/>
+<line x1="0" y1="55" x2="500" y2="55"/>
+<line x1="0" y1="90" x2="500" y2="90"/>
+</g>
+<path d="M0 88L55 74 110 65 165 57 220 45 275 52 330 31 385 36 440 53 500 66" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+<path d="M0 93L55 89 110 78 165 66 220 59 275 44 330 49 385 40 440 48 500 61" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="4 3"/>
+</svg>
+<div class="legend">
+<span>
+<i class="dot" style="background:#16a34a">
+</i>
+HVAC consumption
+</span>
+<span>
+<i class="dot" style="background:#2563eb">
+</i>
+Building occupancy
+</span>
+</div>
+</div>
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+AI Load Balancer
+</h2>
+<div class="sub">
+Flexible load optimization
+</div>
+</div>
+<button class="secondary" style="padding:5px 7px;font-size:10px" onclick="go('balancer')">
+Open
+</button>
+</div>
+<div class="balance-status">
+<i class="pulse">
+</i>
+Grid Status: Stable
+</div>
+<div class="balance-metrics">
+<div>
+<small>
+Current Demand
+</small>
+<b>
+1.84 MW
+</b>
+</div>
+<div>
+<small>
+Peak Threshold
+</small>
+<b>
+2.20 MW
+</b>
+</div>
+<div>
+<small>
+Available Flexibility
+</small>
+<b style="color:var(--green)">
+380 kW
+</b>
+</div>
+<div>
+<small>
+Peak window
+</small>
+<b>
+4:30 PM
+</b>
+</div>
+</div>
+<div class="balance-bar">
+<span>
+</span>
+</div>
+<div class="sub" style="text-align:right">
+83.6% of threshold
+</div>
+<div class="loads">
+<div class="load">
+<label>
+HVAC
+</label>
+<div class="track">
+<i style="width:82%">
+</i>
+</div>
+<b>
+240 kW
+</b>
+</div>
+<div class="load">
+<label>
+EV Charging
+</label>
+<div class="track">
+<i style="width:43%;background:var(--solar)">
+</i>
+</div>
+<b>
+90 kW
+</b>
+</div>
+<div class="load">
+<label>
+Water Heating
+</label>
+<div class="track">
+<i style="width:28%;background:var(--green)">
+</i>
+</div>
+<b>
+35 kW
+</b>
+</div>
+</div>
+</div>
+</div>
+<div class="hvac">
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+HVAC Zones
+</h2>
+<div class="sub">
+Meridian Tower 4 active zones
+</div>
+</div>
+</div>
+<div class="zones">
+<div class="zone">
+<h3>
+North Wing
+</h3>
+<div class="zone-grid">
+<span>
+Temp
+<b>
+22.4C
+</b>
+</span>
+<span>
+Occupancy
+<b>
+74%
+</b>
+</span>
+<span>
+Energy
+<b>
+182 kW
+</b>
+</span>
+</div>
+<span class="status">
+Optimal
+</span>
+</div>
+<div class="zone">
+<h3>
+South Wing
+</h3>
+<div class="zone-grid">
+<span>
+Temp
+<b>
+23.1C
+</b>
+</span>
+<span>
+Occupancy
+<b>
+61%
+</b>
+</span>
+<span>
+Energy
+<b>
+143 kW
+</b>
+</span>
+</div>
+<span class="status">
+Optimal
+</span>
+</div>
+<div class="zone">
+<h3>
+East Wing
+</h3>
+<div class="zone-grid">
+<span>
+Temp
+<b>
+24.7C
+</b>
+</span>
+<span>
+Occupancy
+<b>
+39%
+</b>
+</span>
+<span>
+Energy
+<b>
+116 kW
+</b>
+</span>
+</div>
+<span class="status warn">
+Optimize
+</span>
+</div>
+<div class="zone">
+<h3>
+West Wing
+</h3>
+<div class="zone-grid">
+<span>
+Temp
+<b>
+22.8C
+</b>
+</span>
+<span>
+Occupancy
+<b>
+82%
+</b>
+</span>
+<span>
+Energy
+<b>
+201 kW
+</b>
+</span>
+</div>
+<span class="status high">
+High usage
+</span>
+</div>
+</div>
+</div>
+<div class="card recommend">
+<span class="badge">
+AI RECOMMENDED
+</span>
+<h2>
+Peak demand expected at 4:30 PM
+</h2>
+<p>
+The system recommends temporarily reducing HVAC demand in low-occupancy zones by 8%.
+</p>
+<div class="impact">
+<div>
+<span>
+Expected impact
+</span>
+<b>
+126 kW
+</b>
+</div>
+<div>
+<span>
+Estimated savings
+</span>
+<b>
+$84
+</b>
+</div>
+<div>
+<span>
+CO reduction
+</span>
+<b>
+42 kg
+</b>
+</div>
+</div>
+<button class="primary" onclick="openModal()">
+Apply Recommendation
+</button>
+<button class="secondary" onclick="toast('Recommendation details opened')">
+View Details
+</button>
+</div>
+</div>
+<div class="performance">
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Building Performance
+</h2>
+<div class="sub">
+Portfolio performance today
+</div>
+</div>
+<button class="secondary" style="padding:5px 7px;font-size:10px" onclick="go('buildings')">
+View all
+</button>
+</div>
+<table class="buildings-table">
+<thead>
+<tr>
+<th>
+BUILDING
+</th>
+<th>
+LOAD
+</th>
+<th>
+SOLAR
+</th>
+<th>
+EFFICIENCY
+</th>
+<th>
+STATUS
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<span class="building-name">
+Meridian Tower
+</span>
+<span class="building-city">
+Dhaka
+</span>
+</td>
+<td>
+820 kW
+</td>
+<td>
+42%
+</td>
+<td>
+91%
+</td>
+<td>
+<span class="status">
+Excellent
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="building-name">
+Lakeside Business Center
+</span>
+<span class="building-city">
+Dhaka
+</span>
+</td>
+<td>
+540 kW
+</td>
+<td>
+31%
+</td>
+<td>
+84%
+</td>
+<td>
+<span class="status">
+Good
+</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="building-name">
+Central Plaza
+</span>
+<span class="building-city">
+Dhaka
+</span>
+</td>
+<td>
+480 kW
+</td>
+<td>
+28%
+</td>
+<td>
+76%
+</td>
+<td>
+<span class="status warn">
+Attention
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Recent Alerts
+</h2>
+<div class="sub">
+2 requiring attention
+</div>
+</div>
+<button class="secondary" style="padding:5px 7px;font-size:10px" onclick="go('alerts')">
+See all
+</button>
+</div>
+<div class="alert-list">
+<div class="alert">
+<i class="alert-icon">
+</i>
+<div>
+<b>
+Peak demand approaching
+</b>
+<p>
+Meridian Tower is at 91% threshold.
+</p>
+</div>
+<small>
+8m
+</small>
+</div>
+<div class="alert">
+<i class="alert-icon">
+</i>
+<div>
+<b>
+HVAC anomaly detected
+</b>
+<p>
+East Wing is 18% above expected.
+</p>
+</div>
+<small>
+24m
+</small>
+</div>
+<div class="alert">
+<i class="alert-icon green">
+</i>
+<div>
+<b>
+Optimization completed
+</b>
+<p>
+126 kW reduced during peak period.
+</p>
+</div>
+<small>
+1h
+</small>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="buildings" class="page-view">
+<div class="heading">
+<div>
+<h1>
+Buildings
+</h1>
+<p>
+Monitor energy performance across your commercial portfolio.
+</p>
+</div>
+<button class="primary" onclick="toast('Add building flow opened')">
++ Add Building
+</button>
+</div>
+<div class="filter-row">
+<select>
+<option>
+All buildings
+</option>
+</select>
+<select>
+<option>
+All efficiency levels
+</option>
+</select>
+<select>
+<option>
+All statuses
+</option>
+</select>
+<select>
+<option>
+Energy consumption
+</option>
+</select>
+</div>
+<div class="simple-grid">
+<article class="card building-card" onclick="go('buildingdetail')">
+<h2>
+Meridian Tower
+</h2>
+<p>
+Dhaka, Bangladesh 28 floors
+</p>
+<div class="building-stats">
+<div>
+<span>
+Current Load
+</span>
+<b>
+820 kW
+</b>
+</div>
+<div>
+<span>
+Solar
+</span>
+<b>
+42%
+</b>
+</div>
+<div>
+<span>
+Efficiency
+</span>
+<b style="color:var(--green)">
+91%
+</b>
+</div>
+<div>
+<span>
+Monthly Cost
+</span>
+<b>
+$18,420
+</b>
+</div>
+</div>
+<span class="status">
+Excellent
+</span>
+</article>
+<article class="card building-card" onclick="go('buildingdetail')">
+<h2>
+Lakeside Business Center
+</h2>
+<p>
+Dhaka, Bangladesh 16 floors
+</p>
+<div class="building-stats">
+<div>
+<span>
+Current Load
+</span>
+<b>
+540 kW
+</b>
+</div>
+<div>
+<span>
+Solar
+</span>
+<b>
+31%
+</b>
+</div>
+<div>
+<span>
+Efficiency
+</span>
+<b style="color:var(--green)">
+84%
+</b>
+</div>
+<div>
+<span>
+Monthly Cost
+</span>
+<b>
+$14,280
+</b>
+</div>
+</div>
+<span class="status">
+Good
+</span>
+</article>
+<article class="card building-card" onclick="go('buildingdetail')">
+<h2>
+Central Plaza
+</h2>
+<p>
+Dhaka, Bangladesh 12 floors
+</p>
+<div class="building-stats">
+<div>
+<span>
+Current Load
+</span>
+<b>
+480 kW
+</b>
+</div>
+<div>
+<span>
+Solar
+</span>
+<b>
+28%
+</b>
+</div>
+<div>
+<span>
+Efficiency
+</span>
+<b style="color:var(--orange)">
+76%
+</b>
+</div>
+<div>
+<span>
+Monthly Cost
+</span>
+<b>
+$13,920
+</b>
+</div>
+</div>
+<span class="status warn">
+Needs attention
+</span>
+</article>
+</div>
+</section>
+<section id="buildingdetail" class="page-view">
+<div class="heading">
+<div>
+<button class="secondary" onclick="go('buildings')" style="padding:6px 8px;font-size:11px;margin-bottom:10px">
+Buildings
+</button>
+<h1>
+Meridian Tower
+</h1>
+<p>
+Dhaka, Bangladesh Commercial Office 28 floors
+</p>
+</div>
+<button class="secondary">
+Building settings
+</button>
+</div>
+<div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+<div class="card kpi">
+<div class="kpi-top">
+Current Demand
+</div>
+<div class="metric">
+820
+<span>
+kW
+</span>
+</div>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Daily Consumption
+</div>
+<div class="metric">
+8.2
+<span>
+MWh
+</span>
+</div>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Solar Generation
+</div>
+<div class="metric">
+3.4
+<span>
+MWh
+</span>
+</div>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Energy Cost
+</div>
+<div class="metric">
+$542
+</div>
+</div>
+</div>
+<div class="tabbar">
+<button class="active">
+Overview
+</button>
+<button>
+Energy
+</button>
+<button>
+HVAC
+</button>
+<button>
+Solar
+</button>
+<button>
+Automation
+</button>
+</div>
+<div class="grid2">
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Floor energy heatmap
+</h2>
+<div class="sub">
+Live demand and occupancy by floor
+</div>
+</div>
+</div>
+<div class="floor-map">
+<div class="floor">
+<small>
+Floor 10 82% occupied
+</small>
+<b>
+128 kW
+</b>
+</div>
+<div class="floor">
+<small>
+Floor 9 74% occupied
+</small>
+<b>
+112 kW
+</b>
+</div>
+<div class="floor">
+<small>
+Floor 8 63% occupied
+</small>
+<b>
+96 kW
+</b>
+</div>
+<div class="floor">
+<small>
+Floor 7 77% occupied
+</small>
+<b>
+104 kW
+</b>
+</div>
+<div class="floor">
+<small>
+Floor 6 58% occupied
+</small>
+<b>
+79 kW
+</b>
+</div>
+<div class="floor">
+<small>
+Floor 5 49% occupied
+</small>
+<b>
+72 kW
+</b>
+</div>
+</div>
+</div>
+<div class="card pad">
+<h2>
+Building health
+</h2>
+<div class="stat-grid">
+<div class="stat">
+<span>
+HVAC consumption
+</span>
+<b>
+2.7 MWh
+</b>
+</div>
+<div class="stat">
+<span>
+Carbon emissions
+</span>
+<b>
+1.4 t
+</b>
+</div>
+<div class="stat">
+<span>
+Solar coverage
+</span>
+<b>
+42%
+</b>
+</div>
+<div class="stat">
+<span>
+Peak headroom
+</span>
+<b>
+310 kW
+</b>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="analytics" class="page-view analytics-page">
+<div class="heading">
+<div>
+<h1>
+Energy Analytics
+</h1>
+<p id="analyticsSubtitle">
+Understand patterns, costs, and optimization opportunities.
+</p>
+</div>
+<button class="secondary export-btn" id="analyticsExportBtn" onclick="exportAnalyticsData()">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M12 3v12">
+</path>
+<path d="M7 10l5 5 5-5">
+</path>
+<path d="M5 21h14">
+</path>
+</svg>
+Export data
+</button>
+</div>
+<div class="filter-row analytics-filters analytics-filters-pro">
+<div class="analytics-filter">
+<span class="filter-label">
+Building
+</span>
+<input type="hidden" id="analyticsBuilding" value="Meridian Tower">
+<button class="analytics-trigger" type="button" aria-expanded="false" onclick="toggleAnalyticsDropdown(event,'analyticsBuildingMenu')">
+<span id="analyticsBuildingLabel">
+Meridian Tower
+</span>
+<i>
+</i>
+</button>
+<div class="analytics-menu" id="analyticsBuildingMenu">
+<button type="button" class="selected" onclick="selectAnalyticsOption('analyticsBuilding','Meridian Tower',this)">
+<span class="option-icon blue">
+</span>
+<span>
+<b>
+Meridian Tower
+</b>
+<small>
+Commercial tower - Dhaka
+</small>
+</span>
+<em>
+✓
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsBuilding','Downtown Campus',this)">
+<span class="option-icon cyan">
+</span>
+<span>
+<b>
+Downtown Campus
+</b>
+<small>
+Office and retail campus
+</small>
+</span>
+<em>
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsBuilding','North Tower Group',this)">
+<span class="option-icon green">
+</span>
+<span>
+<b>
+North Tower Group
+</b>
+<small>
+High-rise building group
+</small>
+</span>
+<em>
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsBuilding','All Buildings',this)">
+<span class="option-icon orange">
+</span>
+<span>
+<b>
+All Buildings
+</b>
+<small>
+Portfolio-wide analytics
+</small>
+</span>
+<em>
+</em>
+</button>
+</div>
+</div>
+<div class="analytics-filter">
+<span class="filter-label">
+Date range
+</span>
+<input type="hidden" id="analyticsRange" value="Last 30 days">
+<button class="analytics-trigger" type="button" aria-expanded="false" onclick="toggleAnalyticsDropdown(event,'analyticsRangeMenu')">
+<span id="analyticsRangeLabel">
+Last 30 days
+</span>
+<i>
+</i>
+</button>
+<div class="analytics-menu" id="analyticsRangeMenu">
+<button type="button" onclick="selectAnalyticsOption('analyticsRange','Today',this)">
+<span class="option-icon cyan">
+</span>
+<span>
+<b>
+Today
+</b>
+<small>
+Hourly operating profile
+</small>
+</span>
+<em>
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsRange','Last 7 days',this)">
+<span class="option-icon green">
+</span>
+<span>
+<b>
+Last 7 days
+</b>
+<small>
+Recent daily movement
+</small>
+</span>
+<em>
+</em>
+</button>
+<button type="button" class="selected" onclick="selectAnalyticsOption('analyticsRange','Last 30 days',this)">
+<span class="option-icon blue">
+</span>
+<span>
+<b>
+Last 30 days
+</b>
+<small>
+Monthly trend baseline
+</small>
+</span>
+<em>
+✓
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsRange','This quarter',this)">
+<span class="option-icon orange">
+</span>
+<span>
+<b>
+This quarter
+</b>
+<small>
+Quarterly portfolio view
+</small>
+</span>
+<em>
+</em>
+</button>
+</div>
+</div>
+<div class="analytics-filter">
+<span class="filter-label">
+Source
+</span>
+<input type="hidden" id="analyticsSource" value="All energy sources">
+<button class="analytics-trigger" type="button" aria-expanded="false" onclick="toggleAnalyticsDropdown(event,'analyticsSourceMenu')">
+<span id="analyticsSourceLabel">
+All energy sources
+</span>
+<i>
+</i>
+</button>
+<div class="analytics-menu" id="analyticsSourceMenu">
+<button type="button" class="selected" onclick="selectAnalyticsOption('analyticsSource','All energy sources',this)">
+<span class="option-icon blue">
+</span>
+<span>
+<b>
+All energy sources
+</b>
+<small>
+Grid, solar, and HVAC combined
+</small>
+</span>
+<em>
+✓
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsSource','Grid import',this)">
+<span class="option-icon cyan">
+</span>
+<span>
+<b>
+Grid import
+</b>
+<small>
+Purchased utility energy
+</small>
+</span>
+<em>
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsSource','Solar generation',this)">
+<span class="option-icon orange">
+</span>
+<span>
+<b>
+Solar generation
+</b>
+<small>
+On-site renewable output
+</small>
+</span>
+<em>
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsSource','HVAC load',this)">
+<span class="option-icon green">
+</span>
+<span>
+<b>
+HVAC load
+</b>
+<small>
+Cooling and ventilation demand
+</small>
+</span>
+<em>
+</em>
+</button>
+</div>
+</div>
+<div class="analytics-filter">
+<span class="filter-label">
+Floor
+</span>
+<input type="hidden" id="analyticsFloor" value="All floors">
+<button class="analytics-trigger" type="button" aria-expanded="false" onclick="toggleAnalyticsDropdown(event,'analyticsFloorMenu')">
+<span id="analyticsFloorLabel">
+All floors
+</span>
+<i>
+</i>
+</button>
+<div class="analytics-menu" id="analyticsFloorMenu">
+<button type="button" class="selected" onclick="selectAnalyticsOption('analyticsFloor','All floors',this)">
+<span class="option-icon blue">
+</span>
+<span>
+<b>
+All floors
+</b>
+<small>
+Complete building view
+</small>
+</span>
+<em>
+✓
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsFloor','Lobby',this)">
+<span class="option-icon cyan">
+</span>
+<span>
+<b>
+Lobby
+</b>
+<small>
+Public entry and atrium zones
+</small>
+</span>
+<em>
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsFloor','Floor 5-7',this)">
+<span class="option-icon green">
+</span>
+<span>
+<b>
+Floor 5-7
+</b>
+<small>
+Mid-rise tenant floors
+</small>
+</span>
+<em>
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsFloor','Floor 8-10',this)">
+<span class="option-icon orange">
+</span>
+<span>
+<b>
+Floor 8-10
+</b>
+<small>
+Upper office floors
+</small>
+</span>
+<em>
+</em>
+</button>
+<button type="button" onclick="selectAnalyticsOption('analyticsFloor','Rooftop solar',this)">
+<span class="option-icon yellow">
+</span>
+<span>
+<b>
+Rooftop solar
+</b>
+<small>
+Generation equipment zone
+</small>
+</span>
+<em>
+</em>
+</button>
+</div>
+</div>
+</div>
+<div class="analytics-summary">
+<article class="analytics-mini">
+<span>
+Total consumption
+</span>
+<b id="analyticsTotal">
+18.6 MWh
+</b>
+<small id="analyticsTotalTrend">
+6.2% vs previous period
+</small>
+</article>
+<article class="analytics-mini">
+<span>
+Peak demand
+</span>
+<b id="analyticsPeak">
+2.18 MW
+</b>
+<small id="analyticsPeakTime">
+Peak at 19:20
+</small>
+</article>
+<article class="analytics-mini">
+<span>
+Optimization room
+</span>
+<b id="analyticsSavings">
+320 kWh/day
+</b>
+<small>
+Estimated controllable load
+</small>
+</article>
+</div>
+<div class="analytics-grid">
+<article class="card pad analytics-card analytics-chart-card" id="analyticsConsumptionCard">
+<div class="card-head">
+<div>
+<h2>
+Energy consumption trend
+</h2>
+<div class="sub" id="analyticsConsumptionSub">
+Daily MWh by selected filter
+</div>
+</div>
+<span class="chart-chip blue">
+Live trend
+</span>
+</div>
+<div class="chart-shell" id="analyticsConsumptionChart">
+</div>
+<div class="analytics-legend">
+<span>
+<i class="dot" style="background:var(--blue)">
+</i>
+Consumption
+</span>
+<span>
+<i class="dot" style="background:#93c5fd">
+</i>
+Previous period
+</span>
+</div>
+<div class="analytics-tooltip" id="analyticsTooltip">
+</div>
+</article>
+<article class="card pad analytics-card analytics-chart-card" id="analyticsPeakCard">
+<div class="card-head">
+<div>
+<h2>
+Peak demand trend
+</h2>
+<div class="sub" id="analyticsPeakSub">
+MW demand against threshold
+</div>
+</div>
+<span class="chart-chip orange">
+Risk window
+</span>
+</div>
+<div class="chart-shell" id="analyticsPeakChart">
+</div>
+<div class="analytics-legend">
+<span>
+<i class="dot" style="background:var(--orange)">
+</i>
+Peak demand
+</span>
+<span>
+<i class="dot" style="background:var(--red)">
+</i>
+Capacity line
+</span>
+</div>
+</article>
+<article class="card pad analytics-card analytics-intensity">
+<div class="card-head">
+<div>
+<h2>
+Energy intensity
+</h2>
+<div class="sub">
+kWh/m2 by zone
+</div>
+</div>
+<span class="chart-chip green">
+Benchmark
+</span>
+</div>
+<div class="metric" id="analyticsIntensity">
+128
+<span>
+kWh/m2
+</span>
+</div>
+<span class="trend" id="analyticsIntensityTrend">
+9.4% compared with previous month
+</span>
+<div class="bar-chart" id="analyticsIntensityChart">
+</div>
+</article>
+<article class="card pad analytics-card analytics-insight">
+<div class="card-head">
+<div>
+<h2>
+Energy insight
+</h2>
+<div class="sub">
+Actionable recommendation
+</div>
+</div>
+<span class="chart-chip cyan">
+AI
+</span>
+</div>
+<p id="analyticsInsightText">
+HVAC consumption increased
+<b>
+14%
+</b>
+between 2 PM and 5 PM despite occupancy remaining below 60%. Optimizing temperature setpoints could reduce approximately
+<strong>
+320 kWh/day
+</strong>
+.
+</p>
+<div class="insight-actions">
+<button class="secondary" onclick="go('hvac')">
+Review HVAC zones
+</button>
+<button class="secondary" onclick="openModal()">
+Schedule optimization
+</button>
+</div>
+</article>
+</div>
+</section>
+<section id="solar" class="page-view">
+<div class="heading">
+<div>
+<h1>
+Solar Generation
+</h1>
+<p>
+Live production, utilization, and short-term forecasts.
+</p>
+</div>
+<button class="secondary" onclick="toast('Solar forecast refreshed')">
+Update forecast
+</button>
+</div>
+<div class="solar-hero">
+<div class="card kpi">
+<div class="kpi-top">
+Todays Generation
+<span class="metric-icon sun">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4">
+</circle>
+<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+7.4
+<span>
+MWh
+</span>
+</div>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Current Output
+<span class="metric-icon">
+<svg viewBox="0 0 24 24">
+<path d="M13 2L4 14h7l-1 8 10-13h-7l1-7Z">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+612
+<span>
+kW
+</span>
+</div>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Solar Utilization
+<span class="metric-icon green">
+<svg viewBox="0 0 24 24">
+<path d="M12 14l4-4">
+</path>
+<path d="M4 14a8 8 0 1 1 16 0">
+</path>
+<path d="M6.8 19h10.4">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+86
+<span>
+%
+</span>
+</div>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Exported Energy
+<span class="metric-icon orange">
+<svg viewBox="0 0 24 24">
+<path d="M12 3v12">
+</path>
+<path d="M7 8l5-5 5 5">
+</path>
+<path d="M5 21h14">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+1.2
+<span>
+MWh
+</span>
+</div>
+</div>
+</div>
+<div class="grid2">
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Solar generation curve
+</h2>
+<div class="sub">
+Sunrise 5:32 AM Sunset 6:35 PM kW
+</div>
+</div>
+</div>
+<svg class="demand solar-demand-chart" viewBox="0 0 700 250" preserveAspectRatio="none">
+<defs>
+<linearGradient id="solarCurveFill" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#f59e0b" stop-opacity="0.26"/>
+<stop offset="100%" stop-color="#f59e0b" stop-opacity="0.04"/>
+</linearGradient>
+<linearGradient id="solarSweepGradient" x1="0" x2="1">
+<stop offset="0%" stop-color="#fff7d6" stop-opacity="0"/>
+<stop offset="50%" stop-color="#facc15" stop-opacity="0.22"/>
+<stop offset="100%" stop-color="#fff7d6" stop-opacity="0"/>
+</linearGradient>
+</defs>
+<g class="solar-grid-lines" stroke="#e7edf2">
+<line x1="40" y1="200" x2="680" y2="200"/>
+<line x1="40" y1="135" x2="680" y2="135"/>
+<line x1="40" y1="70" x2="680" y2="70"/>
+</g>
+<path class="solar-area" d="M40 200 C120 200,138 179,196 126 S286 29,364 32 S486 81,548 144 S628 196,680 200 L680 200Z" fill="url(#solarCurveFill)"/>
+<rect class="solar-daylight" x="0" y="25" width="120" height="190" rx="60" fill="url(#solarSweepGradient)"/>
+<g class="solar-shadow-cloud">
+<ellipse cx="412" cy="82" rx="38" ry="15" fill="#94a3b8" opacity=".16"/>
+<ellipse cx="443" cy="84" rx="29" ry="12" fill="#94a3b8" opacity=".13"/>
+<ellipse cx="385" cy="87" rx="24" ry="10" fill="#94a3b8" opacity=".11"/>
+<rect x="368" y="96" width="102" height="88" rx="42" fill="#64748b" opacity=".05"/>
+</g>
+<path class="solar-curve-line" d="M40 200 C120 200,138 179,196 126 S286 29,364 32 S486 81,548 144 S628 196,680 200" fill="none" stroke="#f59e0b" stroke-width="4"/>
+<circle class="solar-spark" cx="196" cy="126" r="4" fill="#f59e0b"/>
+<circle class="solar-spark s2" cx="364" cy="32" r="4" fill="#f59e0b"/>
+<circle class="solar-spark s3" cx="548" cy="144" r="4" fill="#f59e0b"/>
+<g class="solar-sun-orbit">
+<circle class="solar-sun-core" cx="0" cy="0" r="10" fill="#fbbf24" stroke="#fff7ed" stroke-width="4"/>
+<line class="solar-ray" x1="0" y1="-22" x2="0" y2="-31"/>
+<line class="solar-ray" x1="0" y1="22" x2="0" y2="31"/>
+<line class="solar-ray" x1="-22" y1="0" x2="-31" y2="0"/>
+<line class="solar-ray" x1="22" y1="0" x2="31" y2="0"/>
+<line class="solar-ray" x1="16" y1="-16" x2="23" y2="-23"/>
+<line class="solar-ray" x1="-16" y1="16" x2="-23" y2="23"/>
+<animateMotion dur="6.2s" repeatCount="indefinite" path="M40 200 C120 200,138 179,196 126 S286 29,364 32 S486 81,548 144 S628 196,680 200"/>
+</g>
+</svg>
+</div>
+<div class="card pad">
+<h2>
+Solar conditions
+</h2>
+<div class="info-list">
+<div>
+<span>
+Weather condition
+</span>
+<b>
+Partly cloudy
+</b>
+</div>
+<div>
+<span>
+Solar irradiance
+</span>
+<b>
+736 W/m
+</b>
+</div>
+<div>
+<span>
+Panel efficiency
+</span>
+<b style="color:var(--green)">
+89.4%
+</b>
+</div>
+<div>
+<span>
+Installed capacity
+</span>
+<b>
+1.2 MW
+</b>
+</div>
+</div>
+<div class="insight">
+Today's output is 9% below forecast due to cloud cover.
+</div>
+</div>
+</div>
+</section>
+<section id="hvac" class="page-view">
+<div class="heading">
+<div>
+<h1>
+HVAC Management
+</h1>
+<p>
+Monitor performance and safely optimize zone conditions.
+</p>
+</div>
+<button class="primary" onclick="toast('Changes to HVAC setpoints require confirmation')">
+Adjust schedules
+</button>
+</div>
+<div class="grid2">
+<div class="card pad">
+<h2>
+Zone performance map
+</h2>
+<div class="floor-map" style="margin-top:18px">
+<div class="floor">
+<small>
+North Wing 22.4C
+</small>
+<b>
+182 kW
+</b>
+</div>
+<div class="floor">
+<small>
+East Wing 24.7C
+</small>
+<b>
+116 kW
+</b>
+</div>
+<div class="floor">
+<small>
+South Wing 23.1C
+</small>
+<b>
+143 kW
+</b>
+</div>
+<div class="floor">
+<small>
+West Wing 22.8C
+</small>
+<b>
+201 kW
+</b>
+</div>
+<div class="floor">
+<small>
+Conference 23.0C
+</small>
+<b>
+78 kW
+</b>
+</div>
+<div class="floor">
+<small>
+Lobby 21.9C
+</small>
+<b>
+44 kW
+</b>
+</div>
+</div>
+</div>
+<div class="card pad setpoint-card">
+<h2>
+Current setpoint
+</h2>
+<div class="metric" id="currentSetpointMetric">
+23.0
+<span>
+C
+</span>
+</div>
+<p class="sub" id="setpointAppliedText">
+Applied to low-occupancy zones
+</p>
+<div class="field">
+<label>
+New temperature setpoint
+</label>
+<div class="setpoint-control">
+<button class="setpoint-step" type="button" onclick="adjustSetpointDraft(-0.5)">
+-
+</button>
+<input id="setpoint" type="number" value="23" min="18" max="28" step="0.5" oninput="previewSetpointDraft()">
+<button class="setpoint-step" type="button" onclick="adjustSetpointDraft(0.5)">
++
+</button>
+</div>
+</div>
+<div class="setpoint-status" id="setpointStatus">
+Pending changes will require operator confirmation.
+</div>
+<button class="primary" onclick="openSetpoint()">
+Request change
+</button>
+</div>
+</div>
+</section>
+<section id="balancer" class="page-view">
+<div class="heading">
+<div>
+<h1>
+AI Load Balancer
+</h1>
+<p>
+Automatically optimize flexible building loads during high-demand periods.
+</p>
+</div>
+<button class="primary" onclick="openModal()">
+Apply recommendation
+</button>
+</div>
+<div class="grid2">
+<div class="card pad">
+<div class="balance-status">
+<i class="pulse">
+</i>
+Grid Status: Stable
+</div>
+<div class="metric" style="margin-top:25px">
+1.84
+<span>
+MW current demand
+</span>
+</div>
+<div class="balance-bar">
+<span>
+</span>
+</div>
+<div class="legend">
+<span>
+0 MW
+</span>
+<span style="margin-left:auto">
+Peak threshold 2.20 MW
+</span>
+</div>
+<h2 style="margin-top:28px">
+Controllable loads
+</h2>
+<div class="loads">
+<div class="load">
+<label>
+HVAC
+<small style="color:var(--green)">
+Flexible
+</small>
+</label>
+<div class="track">
+<i style="width:82%">
+</i>
+</div>
+<b>
+240 kW
+</b>
+</div>
+<div class="load">
+<label>
+EV charging
+<small style="color:var(--solar)">
+Scheduled
+</small>
+</label>
+<div class="track">
+<i style="width:46%;background:var(--solar)">
+</i>
+</div>
+<b>
+90 kW
+</b>
+</div>
+<div class="load">
+<label>
+Water heating
+</label>
+<div class="track">
+<i style="width:28%;background:var(--green)">
+</i>
+</div>
+<b>
+35 kW
+</b>
+</div>
+<div class="load">
+<label>
+Lighting
+<small style="color:var(--green)">
+Optimized
+</small>
+</label>
+<div class="track">
+<i style="width:16%;background:#16a34a">
+</i>
+</div>
+<b>
+15 kW
+</b>
+</div>
+</div>
+</div>
+<div class="card recommend">
+<span class="badge">
+AI RECOMMENDED
+</span>
+<h2>
+Protect against this afternoons peak
+</h2>
+<p>
+Shift flexible HVAC and EV charging loads at 4:30 PM. Occupancy data indicates zero comfort impact.
+</p>
+<div class="impact">
+<div>
+<span>
+Load reduction
+</span>
+<b>
+126 kW
+</b>
+</div>
+<div>
+<span>
+Est. savings
+</span>
+<b>
+$84
+</b>
+</div>
+</div>
+<button class="primary" onclick="openModal()">
+Schedule optimization
+</button>
+</div>
+</div>
+</section>
+<section id="automation" class="page-view">
+<div class="heading">
+<div>
+<h1>
+Automation
+</h1>
+<p>
+Let GridBalance automatically respond to changing energy conditions.
+</p>
+</div>
+<button class="primary" onclick="openAutomationBuilder()">
++ Create automation
+</button>
+</div>
+<div class="automation-summary">
+<article class="automation-stat">
+<span>
+Active rules
+</span>
+<b id="automationActiveCount">
+3
+</b>
+<small>
+Responding automatically
+</small>
+</article>
+<article class="automation-stat">
+<span>
+Load shifted today
+</span>
+<b id="automationShifted">
+210 kW
+</b>
+<small>
+Across HVAC and solar systems
+</small>
+</article>
+<article class="automation-stat">
+<span>
+Estimated savings
+</span>
+<b id="automationSavings">
+$142
+</b>
+<small>
+Today from scheduled actions
+</small>
+</article>
+</div>
+<div class="automation-controls">
+<div class="segmented automation-tabs">
+<button class="sel" type="button" onclick="setAutomationFilter('all',this)">
+All rules
+</button>
+<button type="button" onclick="setAutomationFilter('active',this)">
+Active
+</button>
+<button type="button" onclick="setAutomationFilter('paused',this)">
+Paused
+</button>
+</div>
+<button class="secondary" type="button" onclick="simulateAutomationCycle()">
+Run system check
+</button>
+</div>
+<div class="automation-modal-overlay" id="automationModalOverlay" onclick="closeAutomationBuilder()">
+</div>
+<article class="card pad automation-builder" id="automationBuilder" role="dialog" aria-modal="true" aria-labelledby="automationBuilderTitle">
+<div class="card-head">
+<div>
+<h2 id="automationBuilderTitle">
+Create automation rule
+</h2>
+<div class="sub">
+Define the condition, response action, and schedule.
+</div>
+</div>
+<button class="secondary" type="button" onclick="closeAutomationBuilder()">
+Cancel
+</button>
+</div>
+<div class="automation-form">
+<div class="field">
+<label>
+Rule name
+</label>
+<input id="automationName" value="Battery Peak Support">
+</div>
+<div class="field">
+<label>
+Condition
+</label>
+<select id="automationCondition">
+<option>
+Grid demand > threshold
+</option>
+<option>
+Solar generation > building demand
+</option>
+<option>
+Occupancy below target
+</option>
+<option>
+Energy price above normal
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Threshold
+</label>
+<input id="automationThreshold" value="2.15 MW">
+</div>
+<div class="field">
+<label>
+Action
+</label>
+<select id="automationAction">
+<option>
+Reduce HVAC in low-occupancy zones
+</option>
+<option>
+Charge battery / export excess energy
+</option>
+<option>
+Reduce lighting and ventilation
+</option>
+<option>
+Shift flexible loads to solar window
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Schedule
+</label>
+<select id="automationSchedule">
+<option>
+Always active
+</option>
+<option>
+Weekdays only
+</option>
+<option>
+After business hours
+</option>
+<option>
+Peak tariff window
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Expected impact
+</label>
+<input id="automationImpact" value="94 kW">
+</div>
+</div>
+<div class="automation-builder-actions">
+<button class="primary" type="button" onclick="createAutomationRule()">
+Save automation
+</button>
+<button class="secondary" type="button" onclick="closeAutomationBuilder()">
+Discard
+</button>
+</div>
+</article>
+<div class="automation-workspace">
+<div class="automation-rules" id="automationRules">
+</div>
+<article class="card pad automation-activity-card">
+<div class="card-head">
+<div>
+<h2>
+Automation Activity
+</h2>
+<div class="sub">
+Latest system actions and operator changes
+</div>
+</div>
+<button class="secondary" type="button" onclick="clearAutomationActivity()">
+Clear
+</button>
+</div>
+<div class="alert-list" id="automationActivity">
+</div>
+</article>
+</div>
+</section>
+<section id="alerts" class="page-view">
+<div class="heading">
+<div>
+<h1>
+Alerts
+</h1>
+<p>
+Stay ahead of energy issues across your portfolio.
+</p>
+</div>
+<div class="heading-actions">
+<button class="secondary" onclick="exportAlertsLog()">
+Export alert log
+</button>
+<button class="secondary" onclick="resolveAll()">
+Mark all resolved
+</button>
+</div>
+</div>
+<div class="card pad">
+<div class="alerts-toolbar">
+<div class="alert-tabs">
+<button class="sel" type="button" data-alert-filter="open" onclick="setAlertFilter('open',this)">
+Open
+</button>
+<button type="button" data-alert-filter="all" onclick="setAlertFilter('all',this)">
+All
+</button>
+<button type="button" data-alert-filter="resolved" onclick="setAlertFilter('resolved',this)">
+Resolved
+</button>
+</div>
+<span class="sub" id="alertsSummary">
+3 open alerts
+</span>
+</div>
+<div class="alert-card-list" id="allAlerts">
+</div>
+<div class="alert-empty" id="alertsEmpty">
+No alerts match this view.
+</div>
+</div>
+</section>
+<section id="sustainability" class="page-view">
+<div class="heading">
+<div>
+<h1>
+Sustainability
+</h1>
+<p>
+Portfolio-wide progress toward your carbon and energy goals.
+</p>
+</div>
+<button class="secondary" onclick="downloadImpactSummary()">
+Download impact summary
+</button>
+</div>
+<div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+<div class="card kpi">
+<div class="kpi-top">
+CO2 Avoided
+<span class="metric-icon green">
+<svg viewBox="0 0 24 24">
+<path d="M5 13c5-8 12-8 14-8 0 7-4 13-11 13H5Z">
+</path>
+<path d="M5 19c3-3 6-5 11-7">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+84.2
+<span>
+tons
+</span>
+</div>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Renewable Energy
+<span class="metric-icon sun">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="4">
+</circle>
+<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+41.8
+<span>
+%
+</span>
+</div>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Energy Saved
+<span class="metric-icon">
+<svg viewBox="0 0 24 24">
+<path d="M13 2L4 14h7l-1 8 10-13h-7l1-7Z">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+12.6
+<span>
+MWh
+</span>
+</div>
+</div>
+<div class="card kpi">
+<div class="kpi-top">
+Equivalent Trees
+<span class="metric-icon green">
+<svg viewBox="0 0 24 24">
+<path d="M12 22V12">
+</path>
+<path d="M7 12a5 5 0 1 1 10 0">
+</path>
+<path d="M5 16a7 7 0 1 1 14 0">
+</path>
+</svg>
+</span>
+</div>
+<div class="metric">
+3,842
+</div>
+</div>
+</div>
+<div class="grid2">
+<div class="card pad sustain-chart-card">
+<h2>
+Monthly CO2 reduction
+</h2>
+<div class="sustain-chart-wrap">
+<svg class="sustain-chart" id="sustainabilityBarChart" viewBox="0 0 600 285" preserveAspectRatio="none">
+<g class="sustain-grid">
+<line x1="28" y1="232" x2="575" y2="232">
+</line>
+<line x1="28" y1="170" x2="575" y2="170">
+</line>
+<line x1="28" y1="108" x2="575" y2="108">
+</line>
+<line x1="28" y1="46" x2="575" y2="46">
+</line>
+</g>
+<g class="sustain-axis">
+<text x="32" y="262">
+Jan
+</text>
+<text x="112" y="262">
+Feb
+</text>
+<text x="192" y="262">
+Mar
+</text>
+<text x="272" y="262">
+Apr
+</text>
+<text x="352" y="262">
+May
+</text>
+<text x="432" y="262">
+Jun
+</text>
+<text x="512" y="262">
+Jul
+</text>
+</g>
+<g>
+<rect class="sustain-bar" tabindex="0" data-value="32 tons" onmousemove="showSustainabilityValue(event,this)" onfocus="showSustainabilityValue(null,this)" onmouseleave="hideSustainabilityValue()" onblur="hideSustainabilityValue()" style="--delay:.04s" x="45" y="160" width="45" height="72">
+</rect>
+<rect class="sustain-bar" tabindex="0" data-value="46 tons" onmousemove="showSustainabilityValue(event,this)" onfocus="showSustainabilityValue(null,this)" onmouseleave="hideSustainabilityValue()" onblur="hideSustainabilityValue()" style="--delay:.1s" x="125" y="132" width="45" height="100">
+</rect>
+<rect class="sustain-bar" tabindex="0" data-value="39 tons" onmousemove="showSustainabilityValue(event,this)" onfocus="showSustainabilityValue(null,this)" onmouseleave="hideSustainabilityValue()" onblur="hideSustainabilityValue()" style="--delay:.16s" x="205" y="146" width="45" height="86">
+</rect>
+<rect class="sustain-bar" tabindex="0" data-value="61 tons" onmousemove="showSustainabilityValue(event,this)" onfocus="showSustainabilityValue(null,this)" onmouseleave="hideSustainabilityValue()" onblur="hideSustainabilityValue()" style="--delay:.22s" x="285" y="99" width="45" height="133">
+</rect>
+<rect class="sustain-bar" tabindex="0" data-value="72 tons" onmousemove="showSustainabilityValue(event,this)" onfocus="showSustainabilityValue(null,this)" onmouseleave="hideSustainabilityValue()" onblur="hideSustainabilityValue()" style="--delay:.28s" x="365" y="76" width="45" height="156">
+</rect>
+<rect class="sustain-bar" tabindex="0" data-value="84 tons" onmousemove="showSustainabilityValue(event,this)" onfocus="showSustainabilityValue(null,this)" onmouseleave="hideSustainabilityValue()" onblur="hideSustainabilityValue()" style="--delay:.34s" x="445" y="57" width="45" height="175">
+</rect>
+<rect class="sustain-bar" tabindex="0" data-value="96 tons" onmousemove="showSustainabilityValue(event,this)" onfocus="showSustainabilityValue(null,this)" onmouseleave="hideSustainabilityValue()" onblur="hideSustainabilityValue()" style="--delay:.4s" x="525" y="35" width="45" height="197">
+</rect>
+</g>
+</svg>
+<div class="sustain-tooltip" id="sustainTooltip">
+84 tons
+</div>
+</div>
+</div>
+<div class="card pad sustain-score-card">
+<h2>
+Sustainability score
+</h2>
+<div class="sustain-score-ring" id="sustainScoreRing">
+<svg viewBox="0 0 120 120">
+<circle class="sustain-score-track" cx="60" cy="60" r="50">
+</circle>
+<circle class="sustain-score-progress" cx="60" cy="60" r="50">
+</circle>
+</svg>
+<div class="sustain-score-inner">
+<b>
+A
+</b>
+<small>
+82 / 100
+</small>
+</div>
+</div>
+<p class="sub">
+Up 6 points from last quarter
+</p>
+</div>
+</div>
+</section>
+<section id="reports" class="page-view">
+<div class="heading">
+<div>
+<h1>
+Reports
+</h1>
+<p>
+Generate polished energy and sustainability reports.
+</p>
+</div>
+<button class="primary" onclick="generateReport()">
+Generate Report
+</button>
+</div>
+<div class="grid2">
+<div class="card pad report-builder">
+<h2>
+Build a report
+</h2>
+<div class="field">
+<label>
+Report type
+</label>
+<select id="reportType" onchange="updateReportPreview()">
+<option>
+Monthly Energy Report
+</option>
+<option>
+HVAC Performance Report
+</option>
+<option>
+Solar Performance Report
+</option>
+<option>
+Sustainability Report
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Building
+</label>
+<select id="reportBuilding" onchange="updateReportPreview()">
+<option>
+All Buildings
+</option>
+<option>
+Meridian Tower
+</option>
+<option>
+Downtown Campus
+</option>
+<option>
+North Tower Group
+</option>
+</select>
+</div>
+<div class="field">
+<label>
+Date range
+</label>
+<select id="reportRange" onchange="updateReportPreview()">
+<option>
+July 1 - July 31, 2026
+</option>
+<option>
+Last 7 days
+</option>
+<option>
+Last 30 days
+</option>
+<option>
+This quarter
+</option>
+</select>
+</div>
+<div class="report-preview" id="reportPreview">
+<h3 id="reportPreviewTitle">
+Monthly Energy Report
+</h3>
+<div class="sub" id="reportPreviewSub">
+All Buildings - July 1 - July 31, 2026
+</div>
+<div class="report-preview-grid">
+<div>
+<span>
+Energy
+</span>
+<b id="reportEnergy">
+18.6 MWh
+</b>
+</div>
+<div>
+<span>
+Peak Load
+</span>
+<b id="reportPeak">
+1.84 MW
+</b>
+</div>
+<div>
+<span>
+Savings
+</span>
+<b id="reportSavings">
+$1,284
+</b>
+</div>
+</div>
+</div>
+<div class="report-status" id="reportStatus">
+Preparing report...
+</div>
+<button class="primary" onclick="generateReport()">
+Generate Report
+</button>
+</div>
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Recent reports
+</h2>
+<div class="sub">
+Available for export
+</div>
+</div>
+</div>
+<div id="recentReports">
+<div class="recent-report-row">
+<span>
+July Monthly Energy Report
+</span>
+<div class="recent-report-actions">
+<button class="secondary" onclick="downloadRecentReport('July Monthly Energy Report','pdf')">
+PDF
+</button>
+<button class="secondary" onclick="downloadRecentReport('July Monthly Energy Report','csv')">
+CSV
+</button>
+</div>
+</div>
+<div class="recent-report-row">
+<span>
+Q2 Sustainability Report
+</span>
+<div class="recent-report-actions">
+<button class="secondary" onclick="downloadRecentReport('Q2 Sustainability Report','pdf')">
+PDF
+</button>
+<button class="secondary" onclick="downloadRecentReport('Q2 Sustainability Report','csv')">
+CSV
+</button>
+</div>
+</div>
+<div class="recent-report-row">
+<span>
+HVAC Performance - July
+</span>
+<div class="recent-report-actions">
+<button class="secondary" onclick="downloadRecentReport('HVAC Performance - July','pdf')">
+PDF
+</button>
+<button class="secondary" onclick="downloadRecentReport('HVAC Performance - July','csv')">
+CSV
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="settings" class="page-view">
+<div class="heading">
+<div>
+<h1>
+Settings
+</h1>
+<p>
+Manage your organization, energy configuration, and notifications.
+</p>
+</div>
+<button class="primary" onclick="toast('Settings saved successfully')">
+Save changes
+</button>
+</div>
+<div class="analytics-grid">
+<div class="card pad">
+<h2>
+Organization
+</h2>
+<div class="field">
+<label>
+Organization name
+</label>
+<input value="Meridian Real Estate">
+</div>
+<div class="field">
+<label>
+Industry
+</label>
+<input value="Commercial Real Estate">
+</div>
+<div class="field">
+<label>
+Time zone
+</label>
+<input value="UTC +06:00 - Dhaka">
+</div>
+</div>
+<div class="card pad">
+<h2>
+Energy Configuration
+</h2>
+<div class="field">
+<label>
+Peak demand threshold
+</label>
+<input value="2.20 MW">
+</div>
+<div class="field">
+<label>
+Energy tariff
+</label>
+<input value="$0.14 / kWh">
+</div>
+<div class="field">
+<label>
+Carbon intensity
+</label>
+<input value="0.64 kg CO2/kWh">
+</div>
+</div>
+<div class="card pad">
+<h2>
+Notifications
+</h2>
+<div class="info-list">
+<div>
+<span>
+Peak demand alerts
+</span>
+<button class="toggle on" onclick="this.classList.toggle('on')">
+</button>
+</div>
+<div>
+<span>
+HVAC anomalies
+</span>
+<button class="toggle on" onclick="this.classList.toggle('on')">
+</button>
+</div>
+<div>
+<span>
+Solar performance alerts
+</span>
+<button class="toggle on" onclick="this.classList.toggle('on')">
+</button>
+</div>
+<div>
+<span>
+Weekly reports
+</span>
+<button class="toggle" onclick="this.classList.toggle('on')">
+</button>
+</div>
+</div>
+</div>
+<div class="card pad">
+<h2>
+Users & Roles
+</h2>
+<div class="info-list">
+<div>
+<span>
+Moon
+</span>
+<b>
+Facility Manager
+</b>
+</div>
+<div>
+<span>
+Sara Rahman
+</span>
+<b>
+Energy Analyst
+</b>
+</div>
+<div>
+<span>
+David Chen
+</span>
+<b>
+Admin
+</b>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="profile" class="page-view">
+<div class="heading">
+<div>
+<h1>
+Facility Manager Dashboard
+</h1>
+<p>
+Profile, access, assigned properties, and operational actions for Moon.
+</p>
+</div>
+<div class="heading-actions">
+<button class="secondary" onclick="prepareProfileExport()">
+Export profile
+</button>
+<button class="primary" id="profileEditBtn" onclick="toggleProfileEdit()">
+Edit profile
+</button>
+</div>
+</div>
+<div class="profile-dashboard">
+<div class="profile-hero">
+<div class="card pad">
+<div class="profile-main">
+<div class="profile-avatar-xl" id="profileAvatarLarge">
+M
+</div>
+<div style="flex:1">
+<div class="profile-title">
+<h2 id="profileDisplayName">
+Moon
+</h2>
+<p>
+<span id="profileDisplayRole">
+Facility Manager
+</span>
+- Meridian Real Estate
+</p>
+</div>
+<div class="profile-status">
+<span class="tag green">
+Active session
+</span>
+<span class="tag">
+Full building access
+</span>
+<span class="tag">
+Dhaka portfolio
+</span>
+</div>
+<div class="profile-form">
+<div class="profile-field">
+<label>
+Full name
+</label>
+<input id="profileNameInput" value="Moon" disabled>
+</div>
+<div class="profile-field">
+<label>
+Role
+</label>
+<select id="profileRoleInput" disabled>
+<option>
+Facility Manager
+</option>
+<option>
+Energy Analyst
+</option>
+<option>
+Operations Admin
+</option>
+</select>
+</div>
+<div class="profile-field">
+<label>
+Email
+</label>
+<input id="profileEmailInput" value="moon@meridianre.com" disabled>
+</div>
+<div class="profile-field">
+<label>
+Phone
+</label>
+<input id="profilePhoneInput" value="+880 1712 000 492" disabled>
+</div>
+</div>
+<div class="profile-actions">
+<button class="secondary" id="profileSaveBtn" onclick="saveProfileDetails()" disabled>
+Save changes
+</button>
+<button class="secondary" onclick="toast('Team message panel opened')">
+Message team
+</button>
+<button class="secondary" onclick="go('settings')">
+Account settings
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Account Summary
+</h2>
+<div class="sub">
+Current permissions and session state
+</div>
+</div>
+</div>
+<div class="profile-summary">
+<div class="summary-row">
+<span>
+Access level
+</span>
+<b>
+Facility Manager
+</b>
+</div>
+<div class="summary-row">
+<span>
+Assigned buildings
+</span>
+<b>
+3 active
+</b>
+</div>
+<div class="summary-row">
+<span>
+Open alerts
+</span>
+<b id="profileOpenAlerts">
+3
+</b>
+</div>
+<div class="summary-row">
+<span>
+Last login
+</span>
+<b id="profileLastLogin">
+Live now
+</b>
+</div>
+<div class="summary-row">
+<span>
+Approval queue
+</span>
+<b id="profileApprovalCount">
+2 pending
+</b>
+</div>
+</div>
+</div>
+</div>
+<div class="profile-grid">
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Assigned Properties
+</h2>
+<div class="sub">
+Buildings Moon can manage
+</div>
+</div>
+<button class="secondary" onclick="go('buildings')">
+View all
+</button>
+</div>
+<div class="profile-card-list">
+<div class="property-row">
+<span>
+<b>
+Meridian Tower
+</b>
+<small>
+1.84 MW current load - Dhaka
+</small>
+</span>
+<button class="mini-btn" onclick="go('buildings')">
+Open
+</button>
+</div>
+<div class="property-row">
+<span>
+<b>
+Downtown Campus
+</b>
+<small>
+932 kW current load - Mixed use
+</small>
+</span>
+<button class="mini-btn" onclick="selectPortfolio('Portfolio: Downtown Campus','Office campus and retail block')">
+Select
+</button>
+</div>
+<div class="property-row">
+<span>
+<b>
+North Tower Group
+</b>
+<small>
+1.21 MW current load - High-rise group
+</small>
+</span>
+<button class="mini-btn" onclick="selectPortfolio('Portfolio: North Tower Group','High-rise tower portfolio')">
+Select
+</button>
+</div>
+</div>
+</div>
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Manager Permissions
+</h2>
+<div class="sub">
+Toggle available operational privileges
+</div>
+</div>
+</div>
+<div class="permission-row">
+<span>
+<b>
+Peak demand approvals
+</b>
+<small>
+Approve load-shift recommendations
+</small>
+</span>
+<button class="toggle on" onclick="togglePermission(this,'Peak demand approvals')">
+</button>
+</div>
+<div class="permission-row">
+<span>
+<b>
+HVAC override authority
+</b>
+<small>
+Change comfort setpoints during events
+</small>
+</span>
+<button class="toggle on" onclick="togglePermission(this,'HVAC override authority')">
+</button>
+</div>
+<div class="permission-row">
+<span>
+<b>
+Solar and battery view
+</b>
+<small>
+Access generation and battery metrics
+</small>
+</span>
+<button class="toggle on" onclick="togglePermission(this,'Solar and battery view')">
+</button>
+</div>
+<div class="permission-row">
+<span>
+<b>
+Weekly report delivery
+</b>
+<small>
+Receive automated PDF summaries
+</small>
+</span>
+<button class="toggle" onclick="togglePermission(this,'Weekly report delivery')">
+</button>
+</div>
+</div>
+</div>
+<div class="profile-grid">
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Approval Queue
+</h2>
+<div class="sub">
+Operational requests waiting for Moon
+</div>
+</div>
+</div>
+<div class="profile-card-list">
+<div class="approval-row">
+<span>
+<b>
+Approve HVAC load shift
+</b>
+<small>
+Floor 7-12 reduction at 4:30 PM
+</small>
+</span>
+<div class="mini-actions">
+<button class="mini-btn" onclick="openModal()">
+Review
+</button>
+<button class="mini-btn primary-mini" onclick="completeApproval(this)">
+Approve
+</button>
+</div>
+</div>
+<div class="approval-row">
+<span>
+<b>
+Review solar variance
+</b>
+<small>
+Output 6% below clear-sky forecast
+</small>
+</span>
+<div class="mini-actions">
+<button class="mini-btn" onclick="go('solar')">
+Open
+</button>
+<button class="mini-btn primary-mini" onclick="completeApproval(this)">
+Resolve
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="card pad">
+<div class="card-head">
+<div>
+<h2>
+Quick Controls
+</h2>
+<div class="sub">
+Common actions for facility managers
+</div>
+</div>
+</div>
+<div class="info-list">
+<div>
+<span>
+Run grid optimization
+</span>
+<button class="secondary" onclick="openModal()">
+Open
+</button>
+</div>
+<div>
+<span>
+Review alerts
+</span>
+<button class="secondary" onclick="go('alerts')">
+Open
+</button>
+</div>
+<div>
+<span>
+HVAC setpoint request
+</span>
+<button class="secondary" onclick="openSetpoint()">
+Request
+</button>
+</div>
+<div>
+<span>
+Download manager report
+</span>
+<button class="secondary" onclick="prepareManagerReport()">
+PDF
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<div id="tooltip" style="display:none;position:fixed;pointer-events:none;background:#102a43;color:#fff;border-radius:8px;padding:9px 11px;font-size:11px;z-index:15;box-shadow:0 4px 15px #102a4366">
+<b>
+3:00 PM
+</b>
+<br>
+Current Load: 1.84 MW
+<br>
+Solar: 612 kW HVAC: 642 kW
+</div>
+<div class="alert-detail-modal card pad" id="alertDetailModal" role="dialog" aria-modal="true" aria-labelledby="alertDetailTitle">
+<div class="zone-detail-head">
+<div>
+<h2 id="alertDetailTitle">
+Alert details
+</h2>
+<div class="sub" id="alertDetailSub">
+Operational alert
+</div>
+</div>
+<button class="zone-close" type="button" onclick="closeAlertDetails()" aria-label="Close alert details">
+×
+</button>
+</div>
+<p id="alertDetailDescription" class="sub">
+</p>
+<div class="alert-detail-grid">
+<div>
+<span>
+Building
+</span>
+<b id="alertDetailBuilding">
+Meridian Tower
+</b>
+</div>
+<div>
+<span>
+Status
+</span>
+<b id="alertDetailStatus">
+Open
+</b>
+</div>
+<div>
+<span>
+Severity
+</span>
+<b id="alertDetailSeverity">
+High
+</b>
+</div>
+<div>
+<span>
+Detected
+</span>
+<b id="alertDetailTime">
+8 minutes ago
+</b>
+</div>
+</div>
+<div class="alert-detail-actions">
+<button class="secondary" type="button" onclick="closeAlertDetails()">
+Close
+</button>
+<button class="primary" type="button" id="alertDetailResolveBtn">
+Resolve alert
+</button>
+</div>
+</div>
+<div class="zone-detail-overlay" id="zoneDetailOverlay" onclick="closeZoneDetails()">
+</div>
+<div class="zone-detail-modal card pad" id="zoneDetailModal" role="dialog" aria-modal="true" aria-labelledby="zoneDetailTitle">
+<div class="zone-detail-head">
+<div>
+<h2 id="zoneDetailTitle">
+Zone details
+</h2>
+<div class="sub" id="zoneDetailSub">
+HVAC zone performance
+</div>
+<span class="zone-status-pill" id="zoneDetailStatus">
+Normal
+</span>
+</div>
+<button class="zone-close" type="button" onclick="closeZoneDetails()" aria-label="Close zone details">
+×
+</button>
+</div>
+<div class="zone-detail-grid">
+<div class="zone-detail-metric">
+<span>
+Temperature
+</span>
+<b id="zoneDetailTemp">
+23.0 C
+</b>
+</div>
+<div class="zone-detail-metric">
+<span>
+HVAC load
+</span>
+<b id="zoneDetailLoad">
+120 kW
+</b>
+</div>
+<div class="zone-detail-metric">
+<span>
+Occupancy
+</span>
+<b id="zoneDetailOccupancy">
+58%
+</b>
+</div>
+<div class="zone-detail-metric">
+<span>
+Efficiency
+</span>
+<b id="zoneDetailEfficiency">
+Good
+</b>
+</div>
+</div>
+<div class="zone-action-panel">
+<p id="zoneDetailInsight">
+This zone is operating within the expected comfort and energy range.
+</p>
+</div>
+<div class="zone-detail-actions">
+<button class="primary" type="button" onclick="optimizeSelectedZone()">
+Optimize zone
+</button>
+<button class="secondary" type="button" onclick="applySetpointToSelectedZone()">
+Apply current setpoint
+</button>
+<button class="secondary" type="button" onclick="closeZoneDetails()">
+Close
+</button>
+</div>
+</div>
+<div class="help-support-overlay" id="helpSupportOverlay" onclick="closeHelpSupport()">
+</div>
+<aside class="help-support-modal card pad" id="helpSupportModal" role="dialog" aria-modal="true" aria-labelledby="helpSupportTitle">
+<div class="help-head">
+<div>
+<h2 id="helpSupportTitle">
+Help & Support
+</h2>
+<div class="sub">
+Find dashboard guidance or contact operations support.
+</div>
+</div>
+<button class="help-close" type="button" onclick="closeHelpSupport()" aria-label="Close help and support">
+×
+</button>
+</div>
+<div class="help-search">
+<input id="helpSearchInput" type="search" placeholder="Search help topics" oninput="filterHelpTopics(this.value)">
+</div>
+<div class="help-topic-list" id="helpTopicList">
+<button class="help-topic" type="button" data-help="overview kpi dashboard energy demand solar grid" onclick="runOverviewGuide()">
+<span>
+<b>
+Overview dashboard guide
+</b>
+<small>
+Highlight KPIs, demand graph, solar mix, and recommendation cards.
+</small>
+</span>
+<span>
+Open
+</span>
+</button>
+<button class="help-topic" type="button" data-help="hvac setpoint zone temperature" onclick="go('hvac');closeHelpSupport();toast('HVAC help: click a zone card or request a setpoint change')">
+<span>
+<b>
+HVAC setpoint help
+</b>
+<small>
+Learn how zone cards, current setpoint, and optimization actions work.
+</small>
+</span>
+<span>
+Open
+</span>
+</button>
+<button class="help-topic" type="button" data-help="alerts warning notification resolve" onclick="go('alerts');closeHelpSupport();toast('Alerts page opened')">
+<span>
+<b>
+Review active alerts
+</b>
+<small>
+Open unresolved building warnings and mark issues as resolved.
+</small>
+</span>
+<span>
+Open
+</span>
+</button>
+<button class="help-topic" type="button" data-help="report export download sustainability impact" onclick="go('reports');closeHelpSupport();toast('Reports page opened')">
+<span>
+<b>
+Reports and exports
+</b>
+<small>
+Generate energy, HVAC, solar, and sustainability reports.
+</small>
+</span>
+<span>
+Open
+</span>
+</button>
+</div>
+<div class="help-empty" id="helpEmpty">
+No matching help topic found.
+</div>
+<div class="support-form">
+<h3>
+Contact support
+</h3>
+<textarea id="supportMessage" placeholder="Describe the issue, for example: Solar chart data is not updating">
+</textarea>
+<div class="support-actions">
+<button class="secondary" type="button" onclick="copySupportId()">
+Copy support ID
+</button>
+<button class="primary" type="button" onclick="submitSupportTicket()">
+Submit ticket
+</button>
+</div>
+</div>
+</aside>
+<div id="toast" class="toast">
+Updated
+</div>
+<div id="modal" class="modal-bg">
+<div class="modal">
+<h2>
+Apply peak-demand optimization?
+</h2>
+<p>
+GridBalance will schedule an 8% HVAC reduction in low-occupancy zones at 4:30 PM. Estimated reduction:
+<b>
+126 kW
+</b>
+; estimated savings:
+<b>
+$84
+</b>
+.
+</p>
+<div class="actions">
+<button class="secondary" onclick="closeModal()">
+Cancel
+</button>
+<button class="primary" onclick="applyRecommendation()">
+Confirm & apply
+</button>
+</div>
+</div>
+</div>
+<script src="script.js">
+</script>
+</body>
+</html>
